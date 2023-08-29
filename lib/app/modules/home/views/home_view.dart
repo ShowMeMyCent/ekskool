@@ -14,7 +14,12 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
         backgroundColor: Color(0xFFF3F7F8),
         appBar: AppBar(
-          backgroundColor: Color(0xFFF3F7F8),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            ),
+          ),
           elevation: 0,
           title: RichText(
             text: TextSpan(
@@ -89,7 +94,8 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ],
                         )),
-                    separatorBuilder: (context, index) => const SizedBox(width: 20),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 20),
                     itemCount: 4),
               ),
               const SizedBox(height: 40),
@@ -264,6 +270,49 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 24),
+
+                    ///ADMIN PAGE BUTTON
+                    Container(
+                      width: Get.width,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () => Get.toNamed(Routes.ADMIN_PAGE),
+                          child: Text(
+                            "Admin Page",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 24),
+
+                    ///PENGECEKAN PASSWORD
+                    Container(
+                      width: Get.width,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: TextButton(
+                          onPressed: () =>
+                              Get.toNamed(Routes.ISI_DATA_USER_PAGE),
+                          child: Text(
+                            "Isi Data User",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40),
                   ],
                 ),
               )

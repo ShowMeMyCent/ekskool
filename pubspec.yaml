@@ -10,6 +10,10 @@ dependencies:
   get: 4.6.5
   google_fonts: ^5.1.0
   feather_icons: ^1.2.0
+  flutter_toggle_tab: ^1.4.1
+  convex_bottom_bar: ^3.2.0
+  icons_plus: ^4.0.0
+  circle_nav_bar: ^2.0.1+1
   flutter:
     sdk: flutter
 
@@ -23,4 +27,3 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/svgs/
