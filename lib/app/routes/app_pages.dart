@@ -44,7 +44,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
@@ -64,7 +64,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ADMIN_PAGE,
-      page: () => AdminPageView(),
+      page: () => const AdminPageView(),
       binding: AdminPageBinding(),
     ),
     GetPage(

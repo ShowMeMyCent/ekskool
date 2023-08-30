@@ -6,11 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-import '../../../controllers/main_controller.dart';
-
 class ProfileView extends GetView {
-  final mainC = Get.find<MainController>();
-
+  const ProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,9 +72,7 @@ class ProfileView extends GetView {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          onPressed: () {
-                            mainC.logout();
-                          },
+                          onPressed: () {},
                           child: Text(
                             'Logout',
                             style: GoogleFonts.poppins(

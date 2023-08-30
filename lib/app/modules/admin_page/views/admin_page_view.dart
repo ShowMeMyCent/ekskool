@@ -1,4 +1,3 @@
-import 'package:ekskool_v1/app/controllers/main_controller.dart';
 import 'package:ekskool_v1/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/admin_page_controller.dart';
 
 class AdminPageView extends GetView<AdminPageController> {
-  final mainC = Get.find<MainController>();
+  const AdminPageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +90,6 @@ class AdminPageView extends GetView<AdminPageController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextField(
-                              controller: controller.emailC,
                               decoration: InputDecoration(
                                 labelText: 'Email',
                                 border: OutlineInputBorder(
@@ -111,9 +109,7 @@ class AdminPageView extends GetView<AdminPageController> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              onPressed: () {
-                                mainC.signup(controller.emailC.text);
-                              },
+                              onPressed: () {},
                               child: Text(
                                 'Tambahkan',
                                 style: GoogleFonts.poppins(
