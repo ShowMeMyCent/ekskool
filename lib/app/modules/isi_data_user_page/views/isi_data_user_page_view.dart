@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 
+import '../../../controllers/main_controller.dart';
 import '../controllers/isi_data_user_page_controller.dart';
 
 class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
-  const IsiDataUserPageView({Key? key}) : super(key: key);
+  final mainC = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,47 +60,13 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: controller.nameC,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
                     hintText: 'Contoh : Lebron James',
-                    hintStyle: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 24),
-
-              ///EMAIL
-              Text(
-                'Email',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  decoration: InputDecoration(
-                    hintText: 'Contoh : lebronjames@gmail.com',
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -130,6 +97,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                 ),
                 child: Obx(
                   () => TextField(
+                    controller: controller.newPassC,
                     obscureText: controller.suffixIconPassword.value,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
@@ -178,6 +146,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: controller.noTelpC,
                   keyboardType: TextInputType.phone,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
@@ -214,6 +183,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: controller.alamatC,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -290,7 +260,16 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextButton(
-                    onPressed: () => Get.offAllNamed(Routes.HOME),
+                    onPressed: () {
+                      mainC.addUserDetail(
+                        controller.nameC.text,
+                        controller.noTelpC.text,
+                        controller.alamatC.text,
+                        controller.tabTextIndexSelected.value.toString(),
+                      );
+                      mainC.updatePassword(controller.newPassC.text);
+                      mainC.updatePrefs();
+                    },
                     child: Text(
                       'Simpan',
                       style: GoogleFonts.poppins(

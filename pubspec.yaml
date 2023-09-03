@@ -16,6 +16,8 @@ dependencies:
   circle_nav_bar: ^2.0.1+1
   firebase_core: 2.15.1
   firebase_auth: 4.9.0
+  cloud_firestore: 4.9.1
+  shared_preferences: 2.2.1
   flutter: 
     sdk: flutter
 

@@ -39,12 +39,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SPLASH,
-      page: () => const SplashView(),
+      page: () => SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
@@ -64,7 +64,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ADMIN_PAGE,
-      page: () => const AdminPageView(),
+      page: () => AdminPageView(),
       binding: AdminPageBinding(),
     ),
     GetPage(
@@ -74,7 +74,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ISI_DATA_USER_PAGE,
-      page: () => const IsiDataUserPageView(),
+      page: () => IsiDataUserPageView(),
       binding: IsiDataUserPageBinding(),
     ),
     GetPage(

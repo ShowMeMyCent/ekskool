@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/main_controller.dart';
 import '../controllers/admin_page_controller.dart';
 
 class AdminPageView extends GetView<AdminPageController> {
-  const AdminPageView({Key? key}) : super(key: key);
+  final mainC = Get.find<MainController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,6 +92,7 @@ class AdminPageView extends GetView<AdminPageController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextField(
+                              controller: controller.emailC,
                               decoration: InputDecoration(
                                 labelText: 'Email',
                                 border: OutlineInputBorder(
@@ -109,7 +112,9 @@ class AdminPageView extends GetView<AdminPageController> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                mainC.signup(controller.emailC.text);
+                              },
                               child: Text(
                                 'Tambahkan',
                                 style: GoogleFonts.poppins(

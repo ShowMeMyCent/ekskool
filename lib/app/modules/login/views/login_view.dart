@@ -1,14 +1,16 @@
 import 'package:ekskool_v1/app/routes/app_pages.dart';
+import 'package:ekskool_v1/main.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/main_controller.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  final mainC = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +54,7 @@ class LoginView extends GetView<LoginController> {
 
                     ///EMAIL-ADDRESS
                     child: TextField(
+                      controller: controller.emailC,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
@@ -83,32 +86,45 @@ class LoginView extends GetView<LoginController> {
                     ),
 
                     ///PASSWORD
-                    child: TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 0,
-                          horizontal: 15,
-                        ),
-                        suffixIcon: Icon(FeatherIcons.eyeOff),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blueGrey,
+                    child: Obx(
+                      () {
+                        return TextField(
+                          controller: controller.passC,
+                          obscureText: controller.isHidden.value,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 0,
+                              horizontal: 15,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                controller.isHidden.toggle();
+                              },
+                              icon: Obx(() {
+                                return Icon((controller.isHidden.value == true)
+                                    ? FeatherIcons.eyeOff
+                                    : FeatherIcons.eye);
+                              }),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blueGrey,
+                              ),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: GoogleFonts.poppins(
+                              fontSize: 19,
+                              color: Color(0xFFCACACA),
+                              height: .4,
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        hintText: 'Password',
-                        hintStyle: GoogleFonts.poppins(
-                          fontSize: 19,
-                          color: Color(0xFFCACACA),
-                          height: .4,
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                SizedBox(height: 30),
+                SizedBox(height: 40),
                 Container(
                   width: Get.width,
                   decoration: BoxDecoration(
@@ -116,7 +132,10 @@ class LoginView extends GetView<LoginController> {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: TextButton(
-                    onPressed: () => Get.offAllNamed(Routes.HOME),
+                    onPressed: () {
+                      mainC.login(
+                          controller.emailC.text, controller.passC.text);
+                    },
                     child: Text(
                       'Login',
                       style: GoogleFonts.poppins(
