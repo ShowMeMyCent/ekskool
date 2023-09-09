@@ -8,8 +8,6 @@ import '../../../controllers/main_controller.dart';
 import '../controllers/admin_page_controller.dart';
 
 class AdminPageView extends GetView<AdminPageController> {
-  final mainC = Get.find<MainController>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,7 +111,7 @@ class AdminPageView extends GetView<AdminPageController> {
                                 ),
                               ),
                               onPressed: () {
-                                mainC.signup(controller.emailC.text);
+                                controller.signup(controller.emailC.text);
                               },
                               child: Text(
                                 'Tambahkan',

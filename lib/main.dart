@@ -22,18 +22,22 @@ class myApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: mainC.streamAuthStatus,
+    return FutureBuilder(
+        future: Future.wait([
+          Future.delayed(Duration(seconds: 1)),
+          mainC.checkuser(),
+        ]),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            bool isUserHasData = snapshot.data?[1];
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: "Application",
-              initialRoute: (snapshot.data == null)
+              initialRoute: (mainC.session == null)
                   ? Routes.LOGIN
-                  : (mainC.readPrefs() == false)
-                      ? Routes.ISI_DATA_USER_PAGE
-                      : Routes.HOME,
+                  : (isUserHasData == true)
+                      ? Routes.HOME
+                      : Routes.ISI_DATA_USER_PAGE,
               getPages: AppPages.routes,
             );
           }

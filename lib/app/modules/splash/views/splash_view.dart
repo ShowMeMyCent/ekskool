@@ -11,9 +11,6 @@ class SplashView extends GetView<SplashController> {
   const SplashView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
-      Duration(seconds: 3),
-    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

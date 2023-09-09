@@ -265,10 +265,11 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                         controller.nameC.text,
                         controller.noTelpC.text,
                         controller.alamatC.text,
-                        controller.tabTextIndexSelected.value.toString(),
+                        controller.tabTextIndexSelected.value == 0
+                            ? 'Laki-Laki'
+                            : 'Perempuan',
                       );
                       mainC.updatePassword(controller.newPassC.text);
-                      mainC.updatePrefs();
                     },
                     child: Text(
                       'Simpan',
