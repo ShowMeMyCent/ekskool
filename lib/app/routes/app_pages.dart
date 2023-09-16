@@ -6,6 +6,8 @@ import '../modules/absensi/bindings/absensi_binding.dart';
 import '../modules/absensi/views/absensi_view.dart';
 import '../modules/admin_page/bindings/admin_page_binding.dart';
 import '../modules/admin_page/views/admin_page_view.dart';
+import '../modules/detail_user_page/bindings/detail_user_page_binding.dart';
+import '../modules/detail_user_page/views/detail_user_page_view.dart';
 import '../modules/history/bindings/history_binding.dart';
 import '../modules/history/views/history_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -86,6 +88,11 @@ class AppPages {
       name: _Paths.LIST_USERS_PAGE,
       page: () => const ListUsersPageView(),
       binding: ListUsersPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_USER_PAGE,
+      page: () => const DetailUserPageView(),
+      binding: DetailUserPageBinding(),
     ),
   ];
 }
