@@ -13,27 +13,35 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          foregroundColor: Colors.black,
-          elevation: 0,
-          backgroundColor: Color(0xFFF3F7F8),
-          title: Text(
-            'List Users',
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
+      appBar: AppBar(
+        foregroundColor: Colors.black,
+        elevation: 0,
+        backgroundColor: Color(0xFFF3F7F8),
+        title: Text(
+          'List Users',
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
           ),
-          centerTitle: true,
         ),
-        body: ListView.separated(
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.DETAIL_USER_PAGE);
-                },
-                child: Container(
+        centerTitle: true,
+      ),
+      body: FutureBuilder(
+        future: controller.catchAllUser(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ListView.separated(
+              itemCount: snapshot.data!.docs.length,
+              separatorBuilder: (context, index) => SizedBox(height: 10),
+              itemBuilder: (context, index) {
+                var userDoc = snapshot.data!.docs[index];
+                var userData = userDoc.data() as Map<String, dynamic>;
+                return Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
@@ -54,7 +62,9 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
                       ),
                     ),
                     title: Text(
-                      'Wildan Khalid Wijaya',
+
+                      '${userData['nama']}'.toUpperCase(),
+                      
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
