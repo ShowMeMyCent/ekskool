@@ -15,6 +15,7 @@ abstract class Routes {
   static const ISI_DATA_USER_PAGE = _Paths.ISI_DATA_USER_PAGE;
   static const ABOUT_PAGE = _Paths.ABOUT_PAGE;
   static const LIST_USERS_PAGE = _Paths.LIST_USERS_PAGE;
+  static const DETAIL_USER_PAGE = _Paths.DETAIL_USER_PAGE;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const ISI_DATA_USER_PAGE = '/isi-data-user-page';
   static const ABOUT_PAGE = '/about-page';
   static const LIST_USERS_PAGE = '/list-users-page';
+  static const DETAIL_USER_PAGE = '/detail-user-page';
 }

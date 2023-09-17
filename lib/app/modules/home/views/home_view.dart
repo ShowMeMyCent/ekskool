@@ -273,25 +273,59 @@ class HomeView extends GetView<HomeController> {
                     ),
                     SizedBox(height: 24),
 
-                    ///ADMIN PAGE BUTTON
-                    Container(
-                      width: Get.width,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: TextButton(
-                          onPressed: () => Get.toNamed(Routes.ADMIN_PAGE),
-                          child: Text(
-                            "Admin Page",
-                            style: TextStyle(color: Colors.white),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ///MENU Admin
+                        GestureDetector(
+                          onTap: () => Get.toNamed(Routes.ADMIN_PAGE),
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            width: 135,
+                            height: 165,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(10 / 100),
+                                  blurRadius: 15,
+                                  offset: Offset(4, 4),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 110,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFE4E4E5),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/menuAdmin.png',
+                                    width: 75,
+                                    height: 75,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Center(
+                                    child: Text(
+                                      'Admin',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-
                     SizedBox(height: 40),
                   ],
                 ),

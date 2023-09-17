@@ -186,8 +186,6 @@ class ProfileView extends GetView {
                           fontWeight: FontWeight.w600,
                         ),
                         decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () {}, icon: Icon(FeatherIcons.edit)),
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                           ),
