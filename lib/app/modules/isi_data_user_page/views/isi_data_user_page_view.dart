@@ -11,6 +11,7 @@ import '../controllers/isi_data_user_page_controller.dart';
 
 class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
   final mainC = Get.find<MainController>();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,249 +40,261 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 40),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 40),
 
-              ///NAMA
-              Text(
-                'Nama Lengkap',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                ///NAMA
+                Text(
+                  'Nama Lengkap',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
+                const SizedBox(height: 4),
+                TextFormField(
                   controller: controller.nameC,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'Contoh : Lebron James',
-                    hintStyle: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 24),
-
-              ///PASSWORD
-              Text(
-                'Password',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Obx(
-                  () => TextField(
-                    controller: controller.newPassC,
-                    obscureText: controller.suffixIconPassword.value,
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        splashColor: Color(0xFFF3F7F8),
-                        color: Colors.grey,
-                        onPressed: () {
-                          controller.suffixIconPassword.value =
-                              !controller.suffixIconPassword.value;
-                        },
-                        icon: Icon(controller.suffixIconPassword.value == true
-                            ? FeatherIcons.eyeOff
-                            : FeatherIcons.eye),
-                      ),
-                      hintText: 'Masukkan password baru',
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Contoh : Lebron James',
                       hintStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFFAAAAAA),
                       ),
                       border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                         borderSide: BorderSide.none,
-                      ),
-                    ),
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Tolong masukan nama anda';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 24),
+
+                ///PASSWORD
+                Text(
+                  'Password',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-              SizedBox(height: 24),
+                const SizedBox(height: 4),
+                Obx(
+                  () {
+                    return TextFormField(
+                      controller: controller.newPassC,
+                      obscureText: controller.suffixIconPassword.value,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            splashColor: Color(0xFFF3F7F8),
+                            color: (controller.suffixIconPassword.value != true)
+                                ? Colors.blue
+                                : Colors.grey,
+                            onPressed: () {
+                              controller.suffixIconPassword.value =
+                                  !controller.suffixIconPassword.value;
+                            },
+                            icon: Icon(
+                                controller.suffixIconPassword.value == true
+                                    ? FeatherIcons.eyeOff
+                                    : FeatherIcons.eye),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'Masukkan Password Baru',
+                          hintStyle: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFAAAAAA),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide.none,
+                          )),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Tolong masukan password baru';
+                        } else if (value == '123123') {
+                          return 'Password tidak bisa 123123';
+                        }
+                        return null;
+                      },
+                    );
+                  },
+                ),
+                SizedBox(height: 24),
 
-              ///NO-TELP
-              Text(
-                'Nomor Telepon',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                ///NO-TELP
+                Text(
+                  'Nomor Telepon',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
+                const SizedBox(height: 4),
+                TextFormField(
                   controller: controller.noTelpC,
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.number,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'Contoh : 08xxxxx',
-                    hintStyle: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Contoh : 08xxxx',
+                      hintStyle: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFAAAAAA),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Tolong isi no telpon anda';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 24),
+
+                ///ALAMAT
+                Text(
+                  'Alamat',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-              SizedBox(height: 24),
-
-              ///ALAMAT
-              Text(
-                'Alamat',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
+                const SizedBox(height: 4),
+                TextFormField(
                   controller: controller.alamatC,
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'Contoh : Gunung Sindur',
-                    hintStyle: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Contoh : Gunung Sindur',
+                      hintStyle: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFAAAAAA),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      )),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Tolong isi alamat anda';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 24),
+
+                ///JENIS KELAMIN
+                Text(
+                  'Jenis Kelamin',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-              SizedBox(height: 24),
-
-              ///JENIS KELAMIN
-              Text(
-                'Jenis Kelamin',
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Container(
-                height: 50,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Obx(
-                  () => FlutterToggleTab(
-                    unSelectedBackgroundColors: [
-                      Colors.white,
-                    ],
-                    width: 84.5,
-                    borderRadius: 10,
-                    selectedIndex: controller.tabTextIndexSelected.value,
-                    selectedBackgroundColors: const [
-                      Color(0xFF357AD4),
-                      Color(0xFF27B1E0),
-                    ],
-                    selectedTextStyle: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    unSelectedTextStyle: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600, color: Color(0xFFAAAAAA)),
-                    labels: controller.listTextTabToggle,
-                    selectedLabelIndex: (index) => controller.toggle(index),
-                    isScroll: false,
-                  ),
-                ),
-              ),
-              SizedBox(height: 4),
-              Obx(
-                () => Text(
-                  "Index selected : ${controller.tabTextIndexSelected.value == 0 ? 'L' : 'P'}",
-                ),
-              ),
-              SizedBox(height: 24),
-
-              ///BUTTON SIMPAN
-
-              Container(
+                const SizedBox(height: 4),
+                Container(
                   height: 50,
                   width: Get.width,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: TextButton(
-                    onPressed: () {
-                      mainC.addUserDetail(
-                        controller.nameC.text,
-                        controller.noTelpC.text,
-                        controller.alamatC.text,
-                        controller.tabTextIndexSelected.value == 0
-                            ? 'Laki-Laki'
-                            : 'Perempuan',
-                      );
-                      mainC.updatePassword(controller.newPassC.text);
-                    },
-                    child: Text(
-                      'Simpan',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                  child: Obx(
+                    () => FlutterToggleTab(
+                      unSelectedBackgroundColors: [
+                        Colors.white,
+                      ],
+                      width: 84.5,
+                      borderRadius: 10,
+                      selectedIndex: controller.tabTextIndexSelected.value,
+                      selectedBackgroundColors: const [
+                        Color(0xFF357AD4),
+                        Color(0xFF27B1E0),
+                      ],
+                      selectedTextStyle: GoogleFonts.poppins(
                         color: Colors.white,
+                        fontWeight: FontWeight.w600,
                       ),
+                      unSelectedTextStyle: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFAAAAAA)),
+                      labels: controller.listTextTabToggle,
+                      selectedLabelIndex: (index) => controller.toggle(index),
+                      isScroll: false,
                     ),
-                  )),
-              SizedBox(height: 24),
-            ],
+                  ),
+                ),
+                SizedBox(height: 24),
+
+                ///BUTTON SIMPAN
+
+                Container(
+                    height: 50,
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          controller.addUserDetail(
+                            controller.nameC.text.toLowerCase(),
+                            controller.noTelpC.text,
+                            controller.alamatC.text.toLowerCase(),
+                            controller.tabTextIndexSelected.value == 0
+                                ? 'l'
+                                : 'p',
+                          );
+                          controller.updatePassword(controller.newPassC.text);
+                        }
+                        ;
+                      },
+                      child: Text(
+                        'Simpan',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )),
+                SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),

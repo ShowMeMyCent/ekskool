@@ -26,60 +26,73 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
         ),
         centerTitle: true,
       ),
-      body: ListView.separated(
-        itemCount: 10,
-        separatorBuilder: (context, index) => SizedBox(height: 10),
-        itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(10 / 100),
-                    blurRadius: 15,
-                    offset: const Offset(4, 4),
+      body: FutureBuilder(
+        future: controller.catchAllUser(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return ListView.separated(
+              itemCount: snapshot.data!.docs.length,
+              separatorBuilder: (context, index) => SizedBox(height: 10),
+              itemBuilder: (context, index) {
+                var userDoc = snapshot.data!.docs[index];
+                var userData = userDoc.data() as Map<String, dynamic>;
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(10 / 100),
+                          blurRadius: 15,
+                          offset: const Offset(4, 4),
+                        ),
+                      ]),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: Image.asset(
+                        'assets/images/male_profile.png',
+                        width: 35,
+                      ),
+                    ),
+                    title: Text(
+                      '${userData['nama']}'.toUpperCase(),
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    isThreeLine: true,
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'wildankh01@gmail.com',
+                        ),
+                        Text(
+                          'Pelatih',
+                          style: TextStyle(color: Colors.blue),
+                        )
+                      ],
+                    ),
+                    subtitleTextStyle: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(FeatherIcons.moreVertical),
+                    ),
                   ),
-                ]),
-            child: ListTile(
-              leading: CircleAvatar(
-                child: Image.asset(
-                  'assets/images/male_profile.png',
-                  width: 35,
-                ),
-              ),
-              title: Text(
-                'Wildan Khalid Wijaya',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              isThreeLine: true,
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'wildankh01@gmail.com',
-                  ),
-                  Text(
-                    'Pelatih',
-                    style: TextStyle(color: Colors.blue),
-                  )
-                ],
-              ),
-              subtitleTextStyle: GoogleFonts.poppins(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: Icon(FeatherIcons.moreVertical),
-              ),
-            ),
-          );
+                );
+              },
+            );
+          }
         },
       ),
     );

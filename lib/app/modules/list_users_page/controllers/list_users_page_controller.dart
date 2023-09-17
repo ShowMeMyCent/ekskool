@@ -1,23 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class ListUsersPageController extends GetxController {
-  //TODO: Implement ListUsersPageController
+  Future<QuerySnapshot> catchAllUser() async {
+    QuerySnapshot allDocs =
+        await FirebaseFirestore.instance.collection('users').get();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+    return allDocs;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../controllers/main_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  final mainC = Get.find<MainController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class HomeView extends GetView<HomeController> {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: 'Hai, David Maulana Ibrahim',
+                  text: 'Hai, ${mainC.userData['nama']}',
                   style: GoogleFonts.poppins(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -291,27 +292,6 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
 
-                    SizedBox(height: 24),
-
-                    ///PENGECEKAN PASSWORD
-                    Container(
-                      width: Get.width,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: TextButton(
-                          onPressed: () =>
-                              Get.toNamed(Routes.ISI_DATA_USER_PAGE),
-                          child: Text(
-                            "Isi Data User",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 40),
                   ],
                 ),

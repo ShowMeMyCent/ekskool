@@ -112,6 +112,7 @@ class AdminPageView extends GetView<AdminPageController> {
                               ),
                               onPressed: () {
                                 controller.signup(controller.emailC.text);
+                                Get.back();
                               },
                               child: Text(
                                 'Tambahkan',

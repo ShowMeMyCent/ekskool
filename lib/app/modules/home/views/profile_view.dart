@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:icons_plus/icons_plus.dart';
 
 import '../../../controllers/main_controller.dart';
 
@@ -146,7 +145,7 @@ class ProfileView extends GetView {
                       ),
                       child: TextFormField(
                         readOnly: true,
-                        initialValue: 'David Maulana Ibrahim',
+                        initialValue: mainC.userData!['nama'],
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -181,7 +180,7 @@ class ProfileView extends GetView {
                       ),
                       child: TextFormField(
                         readOnly: true,
-                        initialValue: 'davidmaulanaibrahim1@gmail.com',
+                        initialValue: mainC.userData!['email'],
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
