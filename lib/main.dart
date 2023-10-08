@@ -24,7 +24,7 @@ class myApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: Future.wait([
-          Future.delayed(Duration(seconds: 1)),
+          Future.delayed(Duration(seconds: 2)),
           mainC.checkuser(),
         ]),
         builder: (context, snapshot) {

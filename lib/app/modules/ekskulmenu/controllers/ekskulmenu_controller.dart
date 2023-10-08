@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class TambahInformasiController extends GetxController {
-  //TODO: Implement TambahInformasiController
+class EkskulmenuController extends GetxController {
+  //TODO: Implement EkskulmenuController
 
   final count = 0.obs;
   @override

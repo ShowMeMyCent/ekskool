@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../controllers/info_controller.dart';
-
-class InfoView extends GetView<InfoController> {
+class InfoView extends GetView<GetView> {
   const InfoView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {

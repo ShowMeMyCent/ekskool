@@ -14,29 +14,28 @@ class SplashView extends GetView<SplashController> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/logo_ekskool.png',
-                    height: 268,
-                    width: 196,
-                  ),
-                  Text(
-                    "EKSKOOL",
-                    style: GoogleFonts.poppins(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 5,
-                    ),
-                  )
-                ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 268,
+                child: Image.asset(
+                  'assets/images/logo_ekskool.png',
+                  height: 268,
+                  width: 196,
+                ),
               ),
-            ),
-          ],
+              Text(
+                "EKSKOOL",
+                style: GoogleFonts.poppins(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 5,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

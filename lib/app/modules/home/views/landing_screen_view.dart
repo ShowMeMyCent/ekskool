@@ -2,13 +2,13 @@ import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 import 'package:ekskool_v1/app/modules/home/views/home_view.dart';
+import 'package:ekskool_v1/app/modules/home/views/info_view.dart';
 import 'package:ekskool_v1/app/modules/home/views/profile_view.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../../info/views/info_view.dart';
 import '../controllers/landing_screen_controller.dart';
 
 class LandingScreenView extends GetView {

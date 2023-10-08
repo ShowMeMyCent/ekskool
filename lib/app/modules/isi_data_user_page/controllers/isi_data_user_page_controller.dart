@@ -36,6 +36,7 @@ class IsiDataUserPageController extends GetxController {
         "alamat": alamat,
         "jenis kelamin": JK,
         "level": 'user',
+        "status": 'active',
       };
 
       try {

@@ -14,22 +14,22 @@ class MainController extends GetxController {
 
   Future<bool> checkuser() async {
     final user = FirebaseAuth.instance.currentUser;
-    final userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user?.uid)
-        .get();
-    if (userDoc.exists) {
-      userData = RxMap<String, dynamic>.from(userDoc.data()!);
-      return true;
-    } else {
-      return false;
+    if (user != null) {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      if (userDoc.exists) {
+        userData = RxMap<String, dynamic>.from(userDoc.data()!);
+        return true;
+      } else {
+        return false;
+      }
     }
+    return false;
   }
 
   void logout() async {
-    final user = FirebaseAuth.instance.currentUser;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(user!.uid);
     await FirebaseAuth.instance.signOut();
     Get.offAllNamed(Routes.LOGIN);
   }

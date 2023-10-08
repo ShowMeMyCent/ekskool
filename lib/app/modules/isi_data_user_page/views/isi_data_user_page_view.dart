@@ -280,6 +280,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                                 : 'p',
                           );
                           controller.updatePassword(controller.newPassC.text);
+                          mainC.checkuser();
                         }
                         ;
                       },

@@ -96,159 +96,167 @@ class ProfileView extends GetView {
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ///IMAGE PROFILE
-              Center(
-                child: Container(
-                  child: Image.asset('assets/images/male_profile_bs.png'),
-                ),
-              ),
-              SizedBox(height: 8),
-
-              ///LEVEL
-              Center(
-                child: Text(
-                  'Pelatih',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF000692),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-
-              ///Username
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //LABEL TEXT USERNAME
-                    Text(
-                      'Username',
-                      style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-
-                    //FORM USERNAME
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        readOnly: true,
-                        initialValue: mainC.userData!['nama'],
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+          child: FutureBuilder(
+              future: mainC.checkuser(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ///IMAGE PROFILE
+                      Center(
+                        child: Container(
+                          child:
+                              Image.asset('assets/images/male_profile_bs.png'),
                         ),
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () {}, icon: Icon(FeatherIcons.edit)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
+                      ),
+                      SizedBox(height: 8),
+
+                      ///LEVEL
+                      Center(
+                        child: Text(
+                          '${mainC.userData['level']}'.toUpperCase(),
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF000692),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
+                      SizedBox(height: 20),
 
-                    //LABEL TEXT EMAIL
-                    Text(
-                      'Email',
-                      style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 5),
+                      ///Username
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //LABEL TEXT USERNAME
+                            Text(
+                              'Username',
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 5),
 
-                    //FORM EMAIL
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        readOnly: true,
-                        initialValue: mainC.userData!['email'],
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-
-                    Divider(
-                      color: Colors.grey,
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ///MATERI
-                    Text(
-                      'Ekskul & Jadwal',
-                      style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Computer Club',
+                            //FORM USERNAME
+                            Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextFormField(
+                                readOnly: true,
+                                initialValue: mainC.userData!['nama'],
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
                                 ),
                               ),
-                              Text(
-                                '|',
+                            ),
+                            SizedBox(height: 10),
+
+                            //LABEL TEXT EMAIL
+                            Text(
+                              'Email',
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+
+                            //FORM EMAIL
+                            Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextFormField(
+                                readOnly: true,
+                                initialValue: mainC.userData!['email'],
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
                                 ),
                               ),
-                              Text(
-                                'Selasa, 3PM - 4PM',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
+                            ),
+                            SizedBox(height: 20),
+
+                            Divider(
+                              color: Colors.grey,
+                            ),
+
+                            SizedBox(height: 20),
+
+                            ///MATERI
+                            Text(
+                              'Ekskul & Jadwal',
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Container(
+                              padding: EdgeInsets.all(15),
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Computer Club',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      Text(
+                                        '|',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Selasa, 3PM - 4PM',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+                    ],
+                  );
+                } else
+                  return Center(child: CircularProgressIndicator());
+              }),
         ));
   }
 }

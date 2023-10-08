@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../controllers/main_controller.dart';
 import '../controllers/admin_page_controller.dart';
 
 class AdminPageView extends GetView<AdminPageController> {
@@ -170,6 +169,7 @@ class AdminPageView extends GetView<AdminPageController> {
                   ),
                   const SizedBox(height: 5),
                   TextButton(
+                    onPressed: () {},
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.blue,
                       fixedSize: Size(Get.width, 10),
@@ -177,7 +177,6 @@ class AdminPageView extends GetView<AdminPageController> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () => Get.toNamed(Routes.TAMBAH_INFORMASI),
                     child: Center(
                       child: Text(
                         "+",
@@ -209,11 +208,13 @@ class AdminPageView extends GetView<AdminPageController> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ///MENU PENGATURAN EKSKUL
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.EKSKULMENU);
+                    },
                     child: Container(
                       padding: EdgeInsets.all(12),
                       width: 135,
@@ -259,64 +260,7 @@ class AdminPageView extends GetView<AdminPageController> {
                     ),
                   ),
 
-                  ///MENU REKAP DATA
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(12),
-                      width: 135,
-                      height: 165,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(10 / 100),
-                            blurRadius: 15,
-                            offset: Offset(4, 4),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            width: 110,
-                            height: 90,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFE4E4E5),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Image.asset(
-                              'assets/images/menuRekap.png',
-                              width: 75,
-                              height: 75,
-                            ),
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                'Rekap Data',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ///MENU List Users
+                  /// List User
                   GestureDetector(
                     onTap: () => Get.toNamed(Routes.LIST_USERS_PAGE),
                     child: Container(

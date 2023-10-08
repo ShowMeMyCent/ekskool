@@ -14,7 +14,7 @@ class LoginController extends GetxController {
 
   void login(email, password) async {
     try {
-      final credential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
       // Check if the user has a document in Firestore with their UID

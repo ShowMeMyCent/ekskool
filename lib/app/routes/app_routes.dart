@@ -16,6 +16,10 @@ abstract class Routes {
   static const ABOUT_PAGE = _Paths.ABOUT_PAGE;
   static const LIST_USERS_PAGE = _Paths.LIST_USERS_PAGE;
   static const DETAIL_USER_PAGE = _Paths.DETAIL_USER_PAGE;
+  static const REKAPDATA = _Paths.REKAPDATA;
+  static const EKSKULMENU = _Paths.EKSKULMENU;
+  static const TAMBAHEKSKUL = _Paths.TAMBAHEKSKUL;
+  static const TAMBAH_EKSKUL = _Paths.TAMBAH_EKSKUL;
 }
 
 abstract class _Paths {
@@ -33,4 +37,8 @@ abstract class _Paths {
   static const ABOUT_PAGE = '/about-page';
   static const LIST_USERS_PAGE = '/list-users-page';
   static const DETAIL_USER_PAGE = '/detail-user-page';
+  static const REKAPDATA = '/rekapdata';
+  static const EKSKULMENU = '/ekskulmenu';
+  static const TAMBAHEKSKUL = '/tambahekskul';
+  static const TAMBAH_EKSKUL = '/tambah-ekskul';
 }
