@@ -8,9 +8,10 @@ import '../../../routes/app_pages.dart';
 import '../controllers/detail_user_page_controller.dart';
 
 class DetailUserPageView extends GetView<DetailUserPageController> {
-  const DetailUserPageView({Key? key}) : super(key: key);
+  var userData = Get.arguments as Map<String, dynamic>;
   @override
   Widget build(BuildContext context) {
+    print(userData);
     return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(
@@ -122,7 +123,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                       SizedBox(height: 5),
                       //Nama User
                       Text(
-                        'Muhammad Edo Selfie',
+                        '${userData['nama']}',
                         style: GoogleFonts.poppins(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -131,7 +132,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                       SizedBox(height: 1),
                       //Nama Email User
                       Text(
-                        'medoselfie@gmail.com',
+                        '${userData['email']}',
                         style: GoogleFonts.poppins(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
@@ -186,7 +187,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     ),
                                     SizedBox(height: 10),
                                     Text(
-                                      'Alamat',
+                                      'Status',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -245,7 +246,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                   children: [
                                     Text(
                                       //Nomor Telepon
-                                      '0813797378182',
+                                      '${userData['no telpon']}',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -253,8 +254,9 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     ),
                                     SizedBox(height: 10),
                                     Text(
-                                      //Jenis Kelamin
-                                      'Laki- laki',
+                                      userData['jenis kelamin'] == 'l'
+                                          ? 'Laki-laki'
+                                          : 'Perempuan',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -263,7 +265,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     SizedBox(height: 10),
                                     Text(
                                       //Level
-                                      'Pelatih',
+                                      '${userData['level']}',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -272,7 +274,9 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     SizedBox(height: 10),
                                     Text(
                                       //Jenis Ekskul
-                                      'Computer Club',
+                                      userData['level'] == 'pelatih'
+                                          ? '${userData['ekskul']}'
+                                          : '-',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
@@ -281,7 +285,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     SizedBox(height: 10),
                                     Text(
                                       //Alamat
-                                      'Batan Indah',
+                                      '${userData['status']}',
                                       overflow: TextOverflow.ellipsis,
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
@@ -303,7 +307,50 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                       title: 'Tetapkan Level',
                                       content: Column(
                                         children: [
-                                          Text('Tetapkan Level'),
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                              backgroundColor:
+                                                  Colors.blueAccent,
+                                              fixedSize: Size(Get.width, 20),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.toNamed(Routes.ABOUT_PAGE);
+                                            },
+                                            child: Text(
+                                              'PELATIH',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                              backgroundColor:
+                                                  Colors.blueAccent,
+                                              fixedSize: Size(Get.width, 20),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.toNamed(Routes.ABOUT_PAGE);
+                                            },
+                                            child: Text(
+                                              'USER',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ));
                                 },

@@ -4,25 +4,16 @@ import 'package:get/get.dart';
 
 class TambahEkskulController extends GetxController {
   TextEditingController nameC = TextEditingController();
-  RxString selectedDay = "Senin".obs;
-  RxList users = [].obs;
-  RxString selectedUser = ''.obs;
+  RxString selectedDay = "".obs;
+  var selecteduser;
 
-  void setSelectedUser(String user) {
-    selectedUser.value = user;
+  setSelectedUser(String user) {
+    selecteduser = user;
   }
 
   void setSelectedDay(String day) {
     selectedDay.value = day;
   }
 
-  void getUsersData() async {
-    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore
-        .instance
-        .collection('users')
-        .where('level', isEqualTo: 'admin')
-        .get();
-
-    users.value = querySnapshot.docs.map((doc) => doc.data()).toList();
-  }
+  void tambahekskul(nama, jadwal, pelatih) {}
 }

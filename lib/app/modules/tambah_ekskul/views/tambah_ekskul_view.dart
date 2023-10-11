@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/tambah_ekskul_controller.dart';
 
 class TambahEkskulView extends GetView<TambahEkskulController> {
@@ -10,7 +13,6 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.users);
     return Scaffold(
       backgroundColor: Color(0xFFF3F7F8),
       appBar: AppBar(
@@ -93,43 +95,58 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                   ),
                 ),
               ),
-              DropdownButtonFormField<String>(
-                value: controller.selectedDay
-                    .value, // Assuming you have a variable to store the selected day
-                onChanged: (String? newValue) {
-                  controller.setSelectedDay(
-                      newValue!); // Assuming you have a function to update the selected day
-                },
-                items: <String>[
+              DropdownSearch(
+                items: [
                   'Senin',
                   'Selasa',
                   'Rabu',
                   'Kamis',
                   'Jumat',
-                  'Sabtu',
-                  'Minggu'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Pilih Hari',
-                  hintStyle: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFFAAAAAA),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
+                ],
+                onChanged: (value) {
+                  controller.setSelectedDay(value!);
+                },
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Pilih Hari',
+                    hintStyle: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFAAAAAA),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Tolong pilih hari';
+                  }
+                  return null;
+                },
+                dropdownBuilder: (context, selectedItem) {
+                  if (selectedItem == null) {
+                    return Text('Pilih Hari',
+                        style: GoogleFonts.poppins(
+                          color: Colors.grey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ));
+                  }
+                  return Text(
+                    '$selectedItem',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                },
               ),
+
               SizedBox(
                 height: 20,
               ),
@@ -146,33 +163,121 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                   ),
                 ),
               ),
-              DropdownButtonFormField<String>(
-                value: controller.selectedUser.value,
-                onChanged: (String? newValue) {
-                  controller.setSelectedUser(newValue!);
-                },
-                items: controller.users.map<DropdownMenuItem<String>>((user) {
-                  return DropdownMenuItem<String>(
-                    value: user['id'],
-                    child: Text(user['name']),
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .where('level', isEqualTo: 'pelatih')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  var usersData = snapshot.data?.docs
+                          .map((DocumentSnapshot<Map<String, dynamic>> doc) =>
+                              doc.data())
+                          .toList() ??
+                      [];
+
+                  List<String> userNames = usersData
+                      .map<String>((user) => user?['nama'] ?? '')
+                      .toList();
+
+                  if (userNames.isEmpty) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      height: 55,
+                      child: Center(
+                          child: Text(
+                        'No data',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFAAAAAA),
+                        ),
+                      )),
+                    );
+                  }
+
+                  return DropdownSearch<String>(
+                    items: userNames,
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        controller.setSelectedUser(newValue);
+                      }
+                    },
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                    dropdownBuilder: (context, selectedItem) {
+                      if (selectedItem == null) {
+                        return Text('Pilih Pelatih',
+                            style: GoogleFonts.poppins(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ));
+                      }
+                      return Text(
+                        '$selectedItem',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Tolong pilih pelatih';
+                      }
+                      return null;
+                    },
                   );
-                }).toList(),
-                icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Select a pelatih',
-                  hintStyle: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFFAAAAAA),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide.none,
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  fixedSize: Size(Get.width, 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-              )
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    controller.tambahekskul(controller.nameC.text,
+                        controller.selectedDay.value, controller.selecteduser);
+                    Get.toNamed(Routes.TAMBAH_EKSKUL);
+                  }
+                },
+                child: Center(
+                  child: Text(
+                    "SUBMIT",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

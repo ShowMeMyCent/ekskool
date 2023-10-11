@@ -20,8 +20,6 @@ import '../modules/list_users_page/bindings/list_users_page_binding.dart';
 import '../modules/list_users_page/views/list_users_page_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/splash/bindings/splash_binding.dart';
-import '../modules/splash/views/splash_view.dart';
 import '../modules/tambah_ekskul/bindings/tambah_ekskul_binding.dart';
 import '../modules/tambah_ekskul/views/tambah_ekskul_view.dart';
 
@@ -37,11 +35,6 @@ class AppPages {
       name: _Paths.HOME,
       page: () => LandingScreenView(),
       binding: HomeBinding(),
-    ),
-    GetPage(
-      name: _Paths.SPLASH,
-      page: () => SplashView(),
-      binding: SplashBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -80,7 +73,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_USER_PAGE,
-      page: () => const DetailUserPageView(),
+      page: () => DetailUserPageView(),
       binding: DetailUserPageBinding(),
     ),
     GetPage(

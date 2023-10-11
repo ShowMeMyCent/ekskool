@@ -12,7 +12,7 @@ class MainController extends GetxController {
 
   RxMap<String, dynamic> userData = RxMap<String, dynamic>({});
 
-  Future<bool> checkuser() async {
+  checkuser() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final userDoc = await FirebaseFirestore.instance
