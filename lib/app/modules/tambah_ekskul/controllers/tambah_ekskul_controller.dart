@@ -15,5 +15,14 @@ class TambahEkskulController extends GetxController {
     selectedDay.value = day;
   }
 
-  void tambahekskul(nama, jadwal, pelatih) {}
+  void tambahekskul(String nama, String jadwal, String pelatih) {
+    var newDocRef = FirebaseFirestore.instance.collection('ekskul').doc();
+
+    newDocRef.set({
+      'id': newDocRef.id, // Set the 'id' field to match the document ID
+      'nama': nama,
+      'jadwal': jadwal,
+      'pelatih': pelatih,
+    });
+  }
 }

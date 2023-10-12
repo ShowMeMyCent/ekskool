@@ -183,11 +183,15 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                           .toList() ??
                       [];
 
-                  List<String> userNames = usersData
-                      .map<String>((user) => user?['nama'] ?? '')
+                  List<Map<String, dynamic>> usersList = usersData
+                      .map<Map<String, dynamic>>((user) => {
+                            'id': user?[
+                                'id'], // Assuming 'id' is the field containing unique identifiers
+                            'nama': user?['nama']
+                          })
                       .toList();
 
-                  if (userNames.isEmpty) {
+                  if (usersList.isEmpty) {
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -195,22 +199,24 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                       ),
                       height: 55,
                       child: Center(
-                          child: Text(
-                        'No data',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFAAAAAA),
+                        child: Text(
+                          'No data',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFAAAAAA),
+                          ),
                         ),
-                      )),
+                      ),
                     );
                   }
 
-                  return DropdownSearch<String>(
-                    items: userNames,
-                    onChanged: (String? newValue) {
+                  return DropdownSearch<Map<String, dynamic>>(
+                    items: usersList,
+                    itemAsString: (item) => item['nama'],
+                    onChanged: (Map<String, dynamic>? newValue) {
                       if (newValue != null) {
-                        controller.setSelectedUser(newValue);
+                        controller.setSelectedUser(newValue['id']);
                       }
                     },
                     dropdownDecoratorProps: DropDownDecoratorProps(
@@ -225,15 +231,17 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                     ),
                     dropdownBuilder: (context, selectedItem) {
                       if (selectedItem == null) {
-                        return Text('Pilih Pelatih',
-                            style: GoogleFonts.poppins(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ));
+                        return Text(
+                          'Pilih Pelatih',
+                          style: GoogleFonts.poppins(
+                            color: Colors.grey,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
                       }
                       return Text(
-                        '$selectedItem',
+                        '${selectedItem['nama']}',
                         style: GoogleFonts.poppins(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -249,6 +257,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                   );
                 },
               ),
+
               SizedBox(
                 height: 20,
               ),
@@ -264,7 +273,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                   if (_formKey.currentState!.validate()) {
                     controller.tambahekskul(controller.nameC.text,
                         controller.selectedDay.value, controller.selecteduser);
-                    Get.toNamed(Routes.TAMBAH_EKSKUL);
+                    Get.back();
                   }
                 },
                 child: Center(
