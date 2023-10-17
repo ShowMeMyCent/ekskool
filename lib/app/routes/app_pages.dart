@@ -43,12 +43,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ABSENSI,
-      page: () => const AbsensiView(),
+      page: () => AbsensiView(),
       binding: AbsensiBinding(),
     ),
     GetPage(
       name: _Paths.HISTORY,
-      page: () => const HistoryView(),
+      page: () => HistoryView(),
       binding: HistoryBinding(),
     ),
     GetPage(
@@ -68,7 +68,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LIST_USERS_PAGE,
-      page: () => const ListUsersPageView(),
+      page: () => ListUsersPageView(),
       binding: ListUsersPageBinding(),
     ),
     GetPage(

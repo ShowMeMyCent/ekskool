@@ -96,68 +96,81 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
               thickness: 2,
             ),
             Expanded(
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 6),
-                      padding: const EdgeInsets.all(15),
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(10 / 100),
-                              blurRadius: 15,
-                              offset: const Offset(4, 4),
-                            ),
-                          ]),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Computer Club',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w600,
+              child: FutureBuilder(
+                  future: controller.fetchekskul(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (snapshot.data!.docs.length == 0) {
+                      return Center(child: Text('Tidak Ada Data'));
+                    } else {
+                      return ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 2),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var ekskulDoc = snapshot.data!.docs[index];
+                          var ekskulData =
+                              ekskulDoc.data() as Map<String, dynamic>;
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 6),
+                            padding: const EdgeInsets.all(15),
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(10 / 100),
+                                    blurRadius: 15,
+                                    offset: const Offset(4, 4),
+                                  ),
+                                ]),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${ekskulDoc['nama']}'.toUpperCase(),
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Text(
+                                        "Lainnya...",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          color: const Color(0xFF357AD4),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                '10-07-23',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
+                                const SizedBox(height: 10),
+                                Text(
+                                  'Ekskul setiap hari : ${ekskulDoc['jadwal']}',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Belajar algoritmma dasar pemrograman php dan pengenalan framework laravel....",
-                            style: GoogleFonts.poppins(fontSize: 10),
-                          ),
-                          const SizedBox(height: 10),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              "Lainnya...",
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: const Color(0xFF357AD4),
-                              ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(height: 2),
-                  itemCount: 10),
+                          );
+                        },
+                      );
+                    }
+                  }),
             ),
           ],
         ));

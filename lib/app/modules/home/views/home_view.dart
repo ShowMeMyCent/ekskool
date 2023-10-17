@@ -1,3 +1,4 @@
+import 'package:ekskool_v1/app/modules/history/controllers/history_controller.dart';
 import 'package:ekskool_v1/app/routes/app_pages.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
@@ -23,25 +24,27 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           elevation: 0,
-          title: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Hai, ${mainC.userData['nama']}',
-                  style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+          title: Obx(
+            () => RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Hai, ${mainC.userData['nama']}',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: '\nSelamat Datang',
-                  style: GoogleFonts.poppins(
-                    fontSize: 10,
-                    color: Colors.black,
+                  TextSpan(
+                    text: '\nSelamat Datang',
+                    style: GoogleFonts.poppins(
+                      fontSize: 10,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           centerTitle: false,
@@ -283,7 +286,7 @@ class HomeView extends GetView<HomeController> {
                           );
                         } else if (mainC.userData['level'] == 'pelatih') {
                           return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ///MENU ABSENSI
                               GestureDetector(
@@ -324,6 +327,61 @@ class HomeView extends GetView<HomeController> {
                                         child: Center(
                                           child: Text(
                                             'Absensi',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  // Initialize the controller first
+                                  Get.put(HistoryController());
+
+                                  // Now, navigate to the "riwayat" screen
+                                  Get.toNamed(Routes.HISTORY);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(12),
+                                  width: 135,
+                                  height: 165,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Colors.black.withOpacity(10 / 100),
+                                        blurRadius: 15,
+                                        offset: Offset(4, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: 110,
+                                        height: 90,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFE4E4E5),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/menuRiwayat.png',
+                                          width: 75,
+                                          height: 75,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Center(
+                                          child: Text(
+                                            'Riwayat',
                                             style: GoogleFonts.poppins(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,

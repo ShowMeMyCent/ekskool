@@ -318,7 +318,10 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                               ),
                                             ),
                                             onPressed: () {
-                                              Get.toNamed(Routes.ABOUT_PAGE);
+                                              controller.assignLevel(
+                                                  'pelatih', userData['id']);
+                                              Get.back();
+                                              Get.back();
                                             },
                                             child: Text(
                                               'PELATIH',
@@ -340,7 +343,10 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                               ),
                                             ),
                                             onPressed: () {
-                                              Get.toNamed(Routes.ABOUT_PAGE);
+                                              controller.assignLevel(
+                                                  'user', userData['id']);
+                                              Get.back();
+                                              Get.back();
                                             },
                                             child: Text(
                                               'USER',

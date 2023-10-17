@@ -196,66 +196,15 @@ class ProfileView extends GetView {
                               ),
                             ),
                             SizedBox(height: 20),
-
-                            Divider(
-                              color: Colors.grey,
-                            ),
-
-                            SizedBox(height: 20),
-
-                            ///MATERI
-                            Text(
-                              'Ekskul & Jadwal',
-                              style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Container(
-                              padding: EdgeInsets.all(15),
-                              height: 55,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Computer Club',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      Text(
-                                        '|',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Selasa, 3PM - 4PM',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),
                     ],
                   );
                 } else
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
               }),
         ));
   }

@@ -1,23 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class EkskulmenuController extends GetxController {
-  //TODO: Implement EkskulmenuController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future fetchekskul() async {
+    QuerySnapshot<Map<String, dynamic>> allDocs =
+        await FirebaseFirestore.instance.collection('ekskul').get();
+    return allDocs;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

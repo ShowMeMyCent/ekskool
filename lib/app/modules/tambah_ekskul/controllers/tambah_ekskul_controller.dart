@@ -15,7 +15,7 @@ class TambahEkskulController extends GetxController {
     selectedDay.value = day;
   }
 
-  void tambahekskul(String nama, String jadwal, String pelatih) {
+  void tambahekskul(String nama, String jadwal, String pelatih) async {
     var newDocRef = FirebaseFirestore.instance.collection('ekskul').doc();
 
     newDocRef.set({

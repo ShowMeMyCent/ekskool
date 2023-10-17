@@ -1,23 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class DetailUserPageController extends GetxController {
-  //TODO: Implement DetailUserPageController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void assignLevel(String level, String userId) {
+    FirebaseFirestore.instance.collection('users').doc(userId).update({
+      'level': level,
+    });
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

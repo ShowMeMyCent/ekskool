@@ -1,4 +1,3 @@
-import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/history_controller.dart';
 
 class HistoryView extends GetView<HistoryController> {
-  const HistoryView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,67 +32,107 @@ class HistoryView extends GetView<HistoryController> {
           )
         ],
       ),
-      body: ListView.separated(
-          itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-              padding: const EdgeInsets.all(15),
-              width: Get.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(10 / 100),
-                      blurRadius: 15,
-                      offset: const Offset(4, 4),
-                    ),
-                  ]),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Computer Club',
-                        style: GoogleFonts.poppins(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        '10-07-23',
-                        style: GoogleFonts.poppins(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "Belajar algoritmma dasar pemrograman php dan pengenalan framework laravel....",
-                    style: GoogleFonts.poppins(fontSize: 10),
-                  ),
-                  const SizedBox(height: 10),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      "Lainnya...",
-                      style: GoogleFonts.poppins(
-                        fontSize: 10,
-                        color: const Color(0xFF357AD4),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => SizedBox(height: 2),
-          itemCount: 10),
+      body: FutureBuilder(
+          future: controller.getHistoryData(),
+          builder: (context, snapshot) {
+            var historyDocs = snapshot.data?.docs;
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              ); // Placeholder for loading
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (historyDocs.length > 0) {
+              return ListView.separated(
+                separatorBuilder: (context, index) => SizedBox(height: 2),
+                itemCount: historyDocs.length,
+                itemBuilder: (context, index) {
+                  var historyDoc = snapshot.data!.docs[index];
+                  var historyItem = historyDoc.data() as Map<String, dynamic>;
+                  return FutureBuilder(
+                      future: Future.wait([
+                        controller.getUserData(historyItem['idPelatih']),
+                        controller.getEkskulData(historyItem['idEkskul']),
+                      ]),
+                      builder: (context, userEkskulSnapshot) {
+                        if (userEkskulSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          ); // Placeholder for loading
+                        } else if (userEkskulSnapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else {
+                          var user = userEkskulSnapshot.data![0];
+                          var ekskul = userEkskulSnapshot.data![1];
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 6),
+                            padding: const EdgeInsets.all(15),
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(10 / 100),
+                                    blurRadius: 15,
+                                    offset: const Offset(4, 4),
+                                  ),
+                                ]),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${ekskul['nama']}',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      '${historyItem['tanggal']}',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  "${historyItem['keterangan']}",
+                                  style: GoogleFonts.poppins(fontSize: 10),
+                                ),
+                                const SizedBox(height: 10),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Text(
+                                    "Lainnya...",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10,
+                                      color: const Color(0xFF357AD4),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      });
+                },
+              );
+            } else {
+              return Center(
+                child: Text('tidak ada data'),
+              );
+            }
+          }),
     );
   }
 }

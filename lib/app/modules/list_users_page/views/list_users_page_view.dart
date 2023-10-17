@@ -26,8 +26,8 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future: controller.catchAllUser(),
+      body: StreamBuilder(
+          stream: controller.catchAllUser(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());

@@ -133,8 +133,9 @@ class LoginView extends GetView<LoginController> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      controller.login(
+                      mainC.login(
                           controller.emailC.text, controller.passC.text);
+                      mainC.checkuser();
                     },
                     child: Text(
                       'Login',

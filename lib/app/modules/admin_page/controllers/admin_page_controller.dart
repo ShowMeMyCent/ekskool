@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AdminPageController extends GetxController {
@@ -12,14 +13,17 @@ class AdminPageController extends GetxController {
         email: email,
         password: '123123',
       );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
+      Get.snackbar(
+        'Success',
+        'user telah ditambahkan',
+        backgroundColor: Colors.white,
+      );
     } catch (e) {
-      print(e);
+      Get.snackbar(
+        'Error',
+        'user gagal ditambahkan',
+        backgroundColor: Colors.white,
+      );
     }
   }
 }
