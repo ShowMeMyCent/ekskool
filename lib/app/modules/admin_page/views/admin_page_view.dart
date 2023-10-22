@@ -169,7 +169,9 @@ class AdminPageView extends GetView<AdminPageController> {
                   ),
                   const SizedBox(height: 5),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.TAMBAH_INFORMASI);
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.blue,
                       fixedSize: Size(Get.width, 10),

@@ -20,6 +20,8 @@ abstract class Routes {
   static const EKSKULMENU = _Paths.EKSKULMENU;
   static const TAMBAHEKSKUL = _Paths.TAMBAHEKSKUL;
   static const TAMBAH_EKSKUL = _Paths.TAMBAH_EKSKUL;
+  static const DETAIL_HISTORY = _Paths.DETAIL_HISTORY;
+  static const DETAIL_EKSKUL = _Paths.DETAIL_EKSKUL;
 }
 
 abstract class _Paths {
@@ -41,4 +43,6 @@ abstract class _Paths {
   static const EKSKULMENU = '/ekskulmenu';
   static const TAMBAHEKSKUL = '/tambahekskul';
   static const TAMBAH_EKSKUL = '/tambah-ekskul';
+  static const DETAIL_HISTORY = '/detail-history';
+  static const DETAIL_EKSKUL = '/detail-ekskul';
 }

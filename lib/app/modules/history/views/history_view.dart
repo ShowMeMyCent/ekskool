@@ -1,3 +1,4 @@
+import 'package:ekskool_v1/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -109,7 +110,9 @@ class HistoryView extends GetView<HistoryController> {
                                 ),
                                 const SizedBox(height: 10),
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(Routes.DETAIL_HISTORY);
+                                  },
                                   child: Text(
                                     "Lainnya...",
                                     style: GoogleFonts.poppins(

@@ -6,6 +6,10 @@ import '../modules/absensi/bindings/absensi_binding.dart';
 import '../modules/absensi/views/absensi_view.dart';
 import '../modules/admin_page/bindings/admin_page_binding.dart';
 import '../modules/admin_page/views/admin_page_view.dart';
+import '../modules/detail_ekskul/bindings/detail_ekskul_binding.dart';
+import '../modules/detail_ekskul/views/detail_ekskul_view.dart';
+import '../modules/detail_history/bindings/detail_history_binding.dart';
+import '../modules/detail_history/views/detail_history_view.dart';
 import '../modules/detail_user_page/bindings/detail_user_page_binding.dart';
 import '../modules/detail_user_page/views/detail_user_page_view.dart';
 import '../modules/ekskulmenu/bindings/ekskulmenu_binding.dart';
@@ -22,6 +26,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/tambah_ekskul/bindings/tambah_ekskul_binding.dart';
 import '../modules/tambah_ekskul/views/tambah_ekskul_view.dart';
+import '../modules/tambah_informasi/bindings/tambah_informasi_binding.dart';
+import '../modules/tambah_informasi/views/tambah_informasi_view.dart';
 
 part 'app_routes.dart';
 
@@ -85,6 +91,21 @@ class AppPages {
       name: _Paths.TAMBAH_EKSKUL,
       page: () => TambahEkskulView(),
       binding: TambahEkskulBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAMBAH_INFORMASI,
+      page: () => const TambahInformasiView(),
+      binding: TambahInformasiBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_HISTORY,
+      page: () => const DetailHistoryView(),
+      binding: DetailHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_EKSKUL,
+      page: () => const DetailEkskulView(),
+      binding: DetailEkskulBinding(),
     ),
   ];
 }

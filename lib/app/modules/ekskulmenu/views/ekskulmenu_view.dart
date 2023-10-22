@@ -145,7 +145,9 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
                                     ),
                                     const SizedBox(width: 10),
                                     GestureDetector(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.toNamed(Routes.DETAIL_EKSKUL);
+                                      },
                                       child: Text(
                                         "Lainnya...",
                                         style: GoogleFonts.poppins(
