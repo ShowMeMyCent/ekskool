@@ -43,7 +43,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
               /// Nama Ekskul
               Container(
                 child: Text(
-                  'Nama Eskul',
+                  'Nama Ekskul',
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
