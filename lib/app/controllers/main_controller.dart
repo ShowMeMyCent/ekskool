@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ekskool_v1/app/routes/app_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -54,9 +55,17 @@ class MainController extends GetxController {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        Get.snackbar(
+          'Error',
+          'email tidak ditemukan',
+          backgroundColor: Colors.white,
+        );
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        Get.snackbar(
+          'Error',
+          'Password Salah',
+          backgroundColor: Colors.white,
+        );
       }
     }
   }

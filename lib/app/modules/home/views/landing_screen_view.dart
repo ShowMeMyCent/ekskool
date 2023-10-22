@@ -28,8 +28,8 @@ class LandingScreenView extends GetView {
     return Scaffold(
       body: Obx(
         () => IndexedStack(
-          children: screens,
           index: landingScreenController.selectedIndex.value,
+          children: screens,
         ),
       ),
       bottomNavigationBar: SafeArea(

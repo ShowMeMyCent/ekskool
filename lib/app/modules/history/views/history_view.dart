@@ -57,9 +57,7 @@ class HistoryView extends GetView<HistoryController> {
                       builder: (context, userEkskulSnapshot) {
                         if (userEkskulSnapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          ); // Placeholder for loading
+                          return SizedBox.shrink();
                         } else if (userEkskulSnapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else {

@@ -48,15 +48,6 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
           centerTitle: false,
-          actions: [
-            Container(
-              padding: EdgeInsets.only(right: 20),
-              child: Image.asset(
-                'assets/images/male_profile.png',
-                width: 35,
-              ),
-            )
-          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -234,7 +225,12 @@ class HomeView extends GetView<HomeController> {
 
                               ///MENU HISTORY
                               GestureDetector(
-                                onTap: () => Get.toNamed(Routes.HISTORY),
+                                onTap: () {
+                                  // Initialize the controller first
+                                  Get.put(HistoryController());
+
+                                  Get.toNamed(Routes.HISTORY);
+                                },
                                 child: Container(
                                   padding: EdgeInsets.all(12),
                                   width: 135,
