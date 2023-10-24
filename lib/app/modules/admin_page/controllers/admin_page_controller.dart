@@ -18,10 +18,18 @@ class AdminPageController extends GetxController {
         'user telah ditambahkan',
         backgroundColor: Colors.white,
       );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        Get.snackbar(
+          'Error',
+          'Email telah dipakai',
+          backgroundColor: Colors.white,
+        );
+      }
     } catch (e) {
       Get.snackbar(
         'Error',
-        'user gagal ditambahkan',
+        'Terjadi error pada server',
         backgroundColor: Colors.white,
       );
     }

@@ -11,7 +11,6 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
   var userData = Get.arguments as Map<String, dynamic>;
   @override
   Widget build(BuildContext context) {
-    print(userData);
     return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(

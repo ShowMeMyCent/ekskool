@@ -10,49 +10,83 @@ class TambahInformasiView extends GetView<TambahInformasiController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF3F7F8),
+      appBar: AppBar(
+        foregroundColor: Colors.black,
+        elevation: 0,
         backgroundColor: Color(0xFFF3F7F8),
-        appBar: AppBar(
-          foregroundColor: Colors.black,
-          elevation: 0,
-          backgroundColor: Color(0xFFF3F7F8),
-          title: Text(
-            'Tambah Informasi',
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.black,
-            ),
+        title: Text(
+          'Tambah Informasi',
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
           ),
-          centerTitle: true,
         ),
-        body: Container(
-          margin: EdgeInsets.fromLTRB(40, 40, 41, 23),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(9),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                //Headline Informasi
-                child: Text(
-                  'Headline Informasi',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                    color: Color(0xff000000),
-                  ),
+        centerTitle: true,
+      ),
+      body: Container(
+        margin: EdgeInsets.fromLTRB(40, 40, 41, 23),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(9),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              //Headline Informasi
+              child: Text(
+                'Headline Informasi',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  height: 1.5,
+                  color: Color(0xff000000),
                 ),
               ),
-              const SizedBox(height: 5),
-              TextFormField(
-                style: GoogleFonts.poppins(
+            ),
+            const SizedBox(height: 5),
+            TextFormField(
+              controller: controller.judulInfo,
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: '',
+                hintStyle: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
+                  color: Color(0xFFAAAAAA),
                 ),
-                decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              //Detail Informasi
+              child: Text(
+                'Detail Informasi',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  height: 1.5,
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: controller.detailInfo,
+              maxLines: 5,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
                   hintText: '',
@@ -64,61 +98,43 @@ class TambahInformasiView extends GetView<TambahInformasiController> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide.none,
-                  ),
+                  )),
+            ),
+            const SizedBox(height: 20),
+            Container(
+                height: 50,
+                width: Get.width,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                //Detail Informasi
-                child: Text(
-                  'Detail Informasi',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                    color: Color(0xff000000),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                maxLines: 5,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: '',
-                    hintStyle: GoogleFonts.poppins(
+                child: TextButton(
+                  onPressed: () {
+                    if (controller.judulInfo.text != '' &&
+                        controller.judulInfo.text != '') {
+                      controller.tambahInfo(
+                          controller.judulInfo.text.toUpperCase(),
+                          controller.detailInfo.text.toLowerCase());
+                    } else {
+                      Get.snackbar(
+                        'Warning',
+                        'Tolong isi data yang diperlukan',
+                        backgroundColor: Colors.white,
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Tambah Informasi',
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
+                      color: Colors.white,
                     ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide.none,
-                    )),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                  height: 50,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Tambah Informasi',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )),
-            ],
-          ),
-        ));
+                )),
+          ],
+        ),
+      ),
+    );
   }
 }

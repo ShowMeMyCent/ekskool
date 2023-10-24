@@ -67,6 +67,12 @@ class MainController extends GetxController {
           backgroundColor: Colors.white,
         );
       }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Terjadi error pada server',
+        backgroundColor: Colors.white,
+      );
     }
   }
 

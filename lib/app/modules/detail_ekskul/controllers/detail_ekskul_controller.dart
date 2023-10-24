@@ -1,23 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class DetailEkskulController extends GetxController {
-  //TODO: Implement DetailEkskulController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchpelatih(idpelatih) {
+    var allDocs = FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: idpelatih)
+        .snapshots();
+    return allDocs;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

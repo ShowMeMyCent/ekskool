@@ -150,7 +150,7 @@ class ProfileView extends GetView {
                               ),
                               child: TextFormField(
                                 readOnly: true,
-                                initialValue: mainC.userData!['nama'],
+                                initialValue: mainC.userData['nama'],
                                 style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -183,7 +183,7 @@ class ProfileView extends GetView {
                               ),
                               child: TextFormField(
                                 readOnly: true,
-                                initialValue: mainC.userData!['email'],
+                                initialValue: mainC.userData['email'],
                                 style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,

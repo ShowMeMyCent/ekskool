@@ -1,5 +1,3 @@
-import 'package:ekskool_v1/app/routes/app_pages.dart';
-import 'package:ekskool_v1/main.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 

@@ -10,6 +10,8 @@ import '../modules/detail_ekskul/bindings/detail_ekskul_binding.dart';
 import '../modules/detail_ekskul/views/detail_ekskul_view.dart';
 import '../modules/detail_history/bindings/detail_history_binding.dart';
 import '../modules/detail_history/views/detail_history_view.dart';
+import '../modules/detail_informasi/bindings/detail_informasi_binding.dart';
+import '../modules/detail_informasi/views/detail_informasi_view.dart';
 import '../modules/detail_user_page/bindings/detail_user_page_binding.dart';
 import '../modules/detail_user_page/views/detail_user_page_view.dart';
 import '../modules/ekskulmenu/bindings/ekskulmenu_binding.dart';
@@ -99,13 +101,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_HISTORY,
-      page: () => const DetailHistoryView(),
+      page: () => DetailHistoryView(),
       binding: DetailHistoryBinding(),
     ),
     GetPage(
       name: _Paths.DETAIL_EKSKUL,
-      page: () => const DetailEkskulView(),
+      page: () => DetailEkskulView(),
       binding: DetailEkskulBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_INFORMASI,
+      page: () => DetailInformasiView(),
+      binding: DetailInformasiBinding(),
     ),
   ];
 }

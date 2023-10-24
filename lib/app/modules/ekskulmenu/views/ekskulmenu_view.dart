@@ -112,61 +112,68 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           var ekskulDoc = snapshot.data!.docs[index];
-                          var ekskulData =
+                          var ekskulItem =
                               ekskulDoc.data() as Map<String, dynamic>;
-                          return Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 6),
-                            padding: const EdgeInsets.all(15),
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(10 / 100),
-                                    blurRadius: 15,
-                                    offset: const Offset(4, 4),
-                                  ),
-                                ]),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${ekskulDoc['nama']}'.toUpperCase(),
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.DETAIL_EKSKUL,
+                                  arguments: ekskulItem);
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 6),
+                              padding: const EdgeInsets.all(15),
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(10 / 100),
+                                      blurRadius: 15,
+                                      offset: const Offset(4, 4),
                                     ),
-                                    const SizedBox(width: 10),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Get.toNamed(Routes.DETAIL_EKSKUL);
-                                      },
-                                      child: Text(
-                                        "Lainnya...",
+                                  ]),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${ekskulDoc['nama']}'.toUpperCase(),
                                         style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: const Color(0xFF357AD4),
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  'Ekskul setiap hari : ${ekskulDoc['jadwal']}',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
+                                      const SizedBox(width: 10),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(Routes.DETAIL_EKSKUL,
+                                              arguments: ekskulItem);
+                                        },
+                                        child: Text(
+                                          "Lainnya...",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 10,
+                                            color: const Color(0xFF357AD4),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Ekskul setiap hari : ${ekskulDoc['jadwal']}',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

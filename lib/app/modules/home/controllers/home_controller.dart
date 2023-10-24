@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  Future catchInfoDoc() async {
-    QuerySnapshot<Map<String, dynamic>> allDocs =
-        await FirebaseFirestore.instance.collection('informasi').get();
+  Stream<QuerySnapshot<Map<String, dynamic>>> catchInfoDoc() {
+    var allDocs =
+        FirebaseFirestore.instance.collection('informasi').snapshots();
     return allDocs;
   }
 }

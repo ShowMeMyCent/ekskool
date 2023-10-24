@@ -64,64 +64,83 @@ class HistoryView extends GetView<HistoryController> {
                         } else {
                           var user = userEkskulSnapshot.data![0];
                           var ekskul = userEkskulSnapshot.data![1];
-                          return Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 6),
-                            padding: const EdgeInsets.all(15),
-                            width: Get.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(10 / 100),
-                                    blurRadius: 15,
-                                    offset: const Offset(4, 4),
-                                  ),
-                                ]),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '${ekskul['nama']}',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                Routes.DETAIL_HISTORY,
+                                arguments: {
+                                  'user': user,
+                                  'ekskul': ekskul,
+                                  'history': historyItem,
+                                },
+                              );
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 6),
+                              padding: const EdgeInsets.all(15),
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(10 / 100),
+                                      blurRadius: 15,
+                                      offset: const Offset(4, 4),
                                     ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      '${historyItem['tanggal']}',
+                                  ]),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '${ekskul['nama']}',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        '${historyItem['tanggal']}',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    "${historyItem['keterangan']}",
+                                    style: GoogleFonts.poppins(fontSize: 10),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(
+                                        Routes.DETAIL_HISTORY,
+                                        arguments: {
+                                          'user': user,
+                                          'ekskul': ekskul,
+                                          'history': historyItem,
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      "Lainnya...",
                                       style: GoogleFonts.poppins(
                                         fontSize: 10,
-                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFF357AD4),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  "${historyItem['keterangan']}",
-                                  style: GoogleFonts.poppins(fontSize: 10),
-                                ),
-                                const SizedBox(height: 10),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(Routes.DETAIL_HISTORY);
-                                  },
-                                  child: Text(
-                                    "Lainnya...",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 10,
-                                      color: const Color(0xFF357AD4),
-                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         }
