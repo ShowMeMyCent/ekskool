@@ -97,59 +97,204 @@ class HomeView extends GetView<HomeController> {
               const SizedBox(height: 40),
 
               ///INFORMASI TERKINI
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding: const EdgeInsets.all(15),
-                width: Get.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(10 / 100),
-                        blurRadius: 15,
-                        offset: const Offset(4, 4),
-                      ),
-                    ]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Informasi Terkini',
-                          style: GoogleFonts.poppins(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w600,
-                          ),
+              StreamBuilder(
+                  stream: controller.fetchNewestInfo(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.all(15),
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(10 / 100),
+                                blurRadius: 15,
+                                offset: const Offset(4, 4),
+                              ),
+                            ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Informasi Terkini',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                const Icon(
+                                  FeatherIcons.bell,
+                                  size: 19,
+                                  color: Color(0xFFF3B65F),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          ],
                         ),
-                        const SizedBox(width: 10),
-                        const Icon(
-                          FeatherIcons.bell,
-                          size: 19,
-                          color: Color(0xFFF3B65F),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer blandit velit id dolor tristique, et tihncidunt purus semper....",
-                      style: GoogleFonts.poppins(fontSize: 10),
-                    ),
-                    const SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        "Lainnya...",
-                        style: GoogleFonts.poppins(
-                          fontSize: 10,
-                          color: const Color(0xFF357AD4),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.all(15),
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(10 / 100),
+                                blurRadius: 15,
+                                offset: const Offset(4, 4),
+                              ),
+                            ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Informasi Terkini',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                const Icon(
+                                  FeatherIcons.bell,
+                                  size: 19,
+                                  color: Color(0xFFF3B65F),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Center(
+                              child: Text('Error'),
+                            )
+                          ],
+                        ),
+                      );
+                    } else if (snapshot.data!.docs.isEmpty) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.all(15),
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(10 / 100),
+                                blurRadius: 15,
+                                offset: const Offset(4, 4),
+                              ),
+                            ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Informasi Terkini',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                const Icon(
+                                  FeatherIcons.bell,
+                                  size: 19,
+                                  color: Color(0xFFF3B65F),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Center(
+                              child: Text('Belum ada informasi'),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                    var document =
+                        snapshot.data!.docs.first; // Get the first document
+                    var data = document.data() as Map<String, dynamic>;
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.DETAIL_INFORMASI, arguments: data);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.all(15),
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(10 / 100),
+                                blurRadius: 15,
+                                offset: const Offset(4, 4),
+                              ),
+                            ]),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Informasi Terkini',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                const Icon(
+                                  FeatherIcons.bell,
+                                  size: 19,
+                                  color: Color(0xFFF3B65F),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              "${data['detail']}",
+                              style: GoogleFonts.poppins(fontSize: 10),
+                            ),
+                            const SizedBox(height: 10),
+                            GestureDetector(
+                              onTap: () {
+                                Get.toNamed(Routes.DETAIL_INFORMASI,
+                                    arguments: data);
+                              },
+                              child: Text(
+                                "Lainnya...",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  color: const Color(0xFF357AD4),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                    );
+                  }),
               const SizedBox(height: 40),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 30),

@@ -22,8 +22,16 @@ dependencies:
   dropdown_search: ^5.0.6
   intl: 0.18.1
   rxdart: 0.27.7
+  file_picker: 6.0.0
+  firebase_storage: ^11.2.0
+  flutter_launcher_icons: ^0.13.1
   flutter: 
     sdk: flutter
+
+flutter_icons:
+  android: true
+  image_path: "assets/images/logo_ekskool.png"
+  adaptive_icon_foreground: "assets/images/launcher_icons.png"
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

@@ -30,66 +30,6 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          Container(
-            padding: EdgeInsets.only(right: 20),
-            child: IconButton(
-              onPressed: () {
-                ///MORE OPTION
-                Get.defaultDialog(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  title: '',
-                  titlePadding: EdgeInsets.zero,
-                  content: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          fixedSize: Size(Get.width, 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {
-                          Get.toNamed(Routes.ABOUT_PAGE);
-                        },
-                        child: Text(
-                          'Activate',
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 230, 26, 12),
-                          fixedSize: Size(Get.width, 20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Deactive',
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              icon: Icon(FeatherIcons.moreHorizontal),
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -118,7 +58,13 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                   child: Container(
                       child: Column(
                     children: [
-                      Image.asset('assets/images/male_profile_bs.png'),
+                      (userData['jenis kelamin'] == 'p')
+                          ? Image.asset(
+                              'assets/images/female_profile.png',
+                            )
+                          : Image.asset(
+                              'assets/images/male_profile_bs.png',
+                            ),
                       SizedBox(height: 5),
                       //Nama User
                       Text(
@@ -178,14 +124,6 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     ),
                                     SizedBox(height: 10),
                                     Text(
-                                      'Jenis Ekskul',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
                                       'Status',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
@@ -198,14 +136,6 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   // Tengah atau Vertical Divider
                                   children: [
-                                    Text(
-                                      '|',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
                                     Text(
                                       '|',
                                       style: GoogleFonts.poppins(
@@ -265,17 +195,6 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     Text(
                                       //Level
                                       '${userData['level']}',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      //Jenis Ekskul
-                                      userData['level'] == 'pelatih'
-                                          ? '${userData['ekskul']}'
-                                          : '-',
                                       style: GoogleFonts.poppins(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,

@@ -26,15 +26,6 @@ class AdminPageView extends GetView<AdminPageController> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          Container(
-            padding: EdgeInsets.only(right: 20),
-            child: Image.asset(
-              'assets/images/male_profile.png',
-              width: 35,
-            ),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(

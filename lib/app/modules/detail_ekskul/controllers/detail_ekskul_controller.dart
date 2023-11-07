@@ -9,4 +9,17 @@ class DetailEkskulController extends GetxController {
         .snapshots();
     return allDocs;
   }
+
+  void gantiPelatih(idEkskul, idPelatih) {
+    FirebaseFirestore.instance.collection('ekskul').doc(idEkskul).update({
+      'pelatih': idPelatih,
+    });
+    Get.back();
+  }
+
+  var selecteduser;
+
+  setSelectedUser(String user) {
+    selecteduser = user;
+  }
 }

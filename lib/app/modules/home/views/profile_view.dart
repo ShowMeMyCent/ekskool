@@ -38,32 +38,13 @@ class ProfileView extends GetView {
                 onPressed: () {
                   ///MORE OPTION
                   Get.defaultDialog(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                    title: '',
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    title: 'LOGOUT',
                     titlePadding: EdgeInsets.zero,
                     content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            fixedSize: Size(Get.width, 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          onPressed: () {
-                            Get.toNamed(Routes.ABOUT_PAGE);
-                          },
-                          child: Text(
-                            'About App',
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
                         TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor:
@@ -106,8 +87,17 @@ class ProfileView extends GetView {
                       ///IMAGE PROFILE
                       Center(
                         child: Container(
-                          child:
-                              Image.asset('assets/images/male_profile_bs.png'),
+                          child: Obx(
+                            () {
+                              if (mainC.userData['jenis kelamin'] == 'p') {
+                                return Image.asset(
+                                    'assets/images/female_profile.png');
+                              } else {
+                                return Image.asset(
+                                    'assets/images/male_profile_bs.png');
+                              }
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(height: 8),

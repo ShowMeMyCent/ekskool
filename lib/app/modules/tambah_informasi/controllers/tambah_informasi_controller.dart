@@ -10,6 +10,9 @@ class TambahInformasiController extends GetxController {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   Rx<TimeOfDay> selectedTime = TimeOfDay.now().obs;
   Rx<DateTime> selectedDate = DateTime.now().obs;
+  String getAmPmLabel(TimeOfDay time) {
+    return time.hour < 12 ? 'AM' : 'PM';
+  }
 
   void tambahInfo(judul, detail) {
     try {
@@ -17,7 +20,8 @@ class TambahInformasiController extends GetxController {
       newDocRef.set({
         "idHistory": newDocRef.id,
         "tanggal": formatter.format(selectedDate.value),
-        "jam": '${selectedTime.value.hour}:${selectedTime.value.minute}',
+        "jam":
+            '${selectedTime.value.hour.toString().padLeft(2, '0')}:${selectedTime.value.minute.toString().padLeft(2, '0')} ${getAmPmLabel(selectedTime.value)}',
         "judul": judul,
         "detail": detail,
       });

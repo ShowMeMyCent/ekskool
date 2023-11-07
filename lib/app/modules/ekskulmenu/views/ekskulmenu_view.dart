@@ -25,15 +25,6 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
             ),
           ),
           centerTitle: true,
-          actions: [
-            Container(
-              padding: EdgeInsets.only(right: 20),
-              child: Image.asset(
-                'assets/images/male_profile.png',
-                width: 35,
-              ),
-            )
-          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -96,8 +87,8 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
               thickness: 2,
             ),
             Expanded(
-              child: FutureBuilder(
-                  future: controller.fetchekskul(),
+              child: StreamBuilder(
+                  stream: controller.fetchekskul(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());

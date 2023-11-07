@@ -32,6 +32,7 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
+              print(snapshot.error);
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
               return ListView.separated(
@@ -60,11 +61,17 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
                             ]),
                         child: ListTile(
                           leading: CircleAvatar(
-                            child: Image.asset(
-                              'assets/images/male_profile.png',
-                              width: 35,
-                            ),
-                          ),
+                              child: (userData['jenis kelamin'] == 'p')
+                                  ? ClipOval(
+                                      child: Image.asset(
+                                        'assets/images/female_profile.png',
+                                        width: 35,
+                                      ),
+                                    )
+                                  : Image.asset(
+                                      'assets/images/male_profile.png',
+                                      width: 35,
+                                    )),
                           title: Text(
                             '${userData['nama']}'.toUpperCase(),
                             style: GoogleFonts.poppins(
@@ -88,64 +95,6 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
                           subtitleTextStyle: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(FeatherIcons.moreVertical),
-                            onPressed: () {
-                              Get.defaultDialog(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 20),
-                                title: '',
-                                titlePadding: EdgeInsets.zero,
-                                content: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: Colors.blue,
-                                        fixedSize: Size(Get.width, 20),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        Get.toNamed(Routes.DETAIL_USER_PAGE,
-                                            arguments: userData);
-                                      },
-                                      child: Text(
-                                        'Detail User',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                    TextButton(
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 230, 26, 12),
-                                        fixedSize: Size(Get.width, 20),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Deactive User',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
                           ),
                         ),
                       ),

@@ -29,21 +29,11 @@ class InfoView extends GetView<HomeController> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          Container(
-            padding: EdgeInsets.only(right: 20),
-            child: Image.asset(
-              'assets/images/male_profile.png',
-              width: 35,
-            ),
-          )
-        ],
       ),
       body: StreamBuilder(
           stream: controller.catchInfoDoc(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              print(snapshot.data);
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));

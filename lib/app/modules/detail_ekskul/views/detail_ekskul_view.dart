@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,22 +142,127 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                   Expanded(
                     child: Align(
                       alignment: Alignment.bottomCenter,
-                      child: TextButton(
-                          style: TextButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                            fixedSize: Size(Get.width, 20),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('users')
+                                .where('level', isEqualTo: 'pelatih')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text('Something went wrong');
+                              }
+
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Text("Loading");
+                              }
+
+                              var usersData = snapshot.data?.docs
+                                      .map((DocumentSnapshot<
+                                                  Map<String, dynamic>>
+                                              doc) =>
+                                          doc.data())
+                                      .toList() ??
+                                  [];
+
+                              List<Map<String, dynamic>> usersList = usersData
+                                  .map<Map<String, dynamic>>((user) => {
+                                        'id': user?[
+                                            'id'], // Assuming 'id' is the field containing unique identifiers
+                                        'nama': user?['nama']
+                                      })
+                                  .toList();
+
+                              if (usersList.isEmpty) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  height: 55,
+                                  child: Center(
+                                    child: Text(
+                                      'No data',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFFAAAAAA),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+
+                              return DropdownSearch<Map<String, dynamic>>(
+                                items: usersList,
+                                itemAsString: (item) => item['nama'],
+                                onChanged: (Map<String, dynamic>? newValue) {
+                                  if (newValue != null) {
+                                    controller.setSelectedUser(newValue['id']);
+                                  }
+                                },
+                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                  dropdownSearchDecoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                  ),
+                                ),
+                                dropdownBuilder: (context, selectedItem) {
+                                  if (selectedItem == null) {
+                                    return Text(
+                                      'Ganti Pelatih',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.grey,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    );
+                                  }
+                                  return Text(
+                                    '${selectedItem['nama']}',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Tolong pilih pelatih';
+                                  }
+                                  return null;
+                                },
+                              );
+                            },
                           ),
-                          onPressed: () {},
-                          child: Text(
-                            'Tetapkan Pelatih',
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          )),
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.blueAccent,
+                                fixedSize: Size(Get.width, 20),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              onPressed: () {
+                                controller.gantiPelatih(
+                                    ekskulData['id'], controller.selecteduser);
+                              },
+                              child: Text(
+                                'Ganti Pelatih',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                ),
+                              )),
+                        ],
+                      ),
                     ),
                   )
                 ],

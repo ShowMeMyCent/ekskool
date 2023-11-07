@@ -16,6 +16,7 @@ class ListUsersPageController extends GetxController {
       yield* FirebaseFirestore.instance
           .collection('users')
           .where('level', isNotEqualTo: 'admin')
+          .orderBy('level')
           .snapshots();
     }
   }

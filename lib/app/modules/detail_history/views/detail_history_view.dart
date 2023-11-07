@@ -69,6 +69,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                       color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(5),
                     ),
+                    child: Image.network('${history['dok']}'),
                   ),
                   const SizedBox(height: 20),
                   Row(
