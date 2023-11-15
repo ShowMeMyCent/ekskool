@@ -6,23 +6,32 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 
 import '../../../controllers/main_controller.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/isi_data_user_page_controller.dart';
 
 class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
   final mainC = Get.find<MainController>();
   final _formKey = GlobalKey<FormState>();
+
+  IsiDataUserPageView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
 
       ///APP BAR
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(10),
           ),
         ),
+        leading: IconButton(
+            onPressed: () {
+              mainC.logout();
+              Get.offAllNamed(Routes.LOGIN);
+            },
+            icon: const Icon(Icons.arrow_back)),
         foregroundColor: Colors.black,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -68,7 +77,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                       hintStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFAAAAAA),
+                        color: const Color(0xFFAAAAAA),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -81,7 +90,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                     return null;
                   },
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 ///PASSWORD
                 Text(
@@ -103,7 +112,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                       ),
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
-                            splashColor: Color(0xFFF3F7F8),
+                            splashColor: const Color(0xFFF3F7F8),
                             color: (controller.suffixIconPassword.value != true)
                                 ? Colors.blue
                                 : Colors.grey,
@@ -122,7 +131,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                           hintStyle: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFFAAAAAA),
+                            color: const Color(0xFFAAAAAA),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -139,7 +148,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                     );
                   },
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 ///NO-TELP
                 Text(
@@ -164,7 +173,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                       hintStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFAAAAAA),
+                        color: const Color(0xFFAAAAAA),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -177,7 +186,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                     return null;
                   },
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 ///ALAMAT
                 Text(
@@ -201,7 +210,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                       hintStyle: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFAAAAAA),
+                        color: const Color(0xFFAAAAAA),
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -214,7 +223,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                     return null;
                   },
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 ///JENIS KELAMIN
                 Text(
@@ -233,7 +242,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                   ),
                   child: Obx(
                     () => FlutterToggleTab(
-                      unSelectedBackgroundColors: [
+                      unSelectedBackgroundColors: const [
                         Colors.white,
                       ],
                       width: 84.5,
@@ -249,14 +258,14 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                       ),
                       unSelectedTextStyle: GoogleFonts.poppins(
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFFAAAAAA)),
+                          color: const Color(0xFFAAAAAA)),
                       labels: controller.listTextTabToggle,
                       selectedLabelIndex: (index) => controller.toggle(index),
                       isScroll: false,
                     ),
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 ///BUTTON SIMPAN
 
@@ -271,17 +280,15 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           controller.addUserDetail(
-                            controller.nameC.text.toLowerCase(),
-                            controller.noTelpC.text,
-                            controller.alamatC.text.toLowerCase(),
-                            controller.tabTextIndexSelected.value == 0
-                                ? 'l'
-                                : 'p',
-                          );
-                          controller.updatePassword(controller.newPassC.text);
+                              controller.nameC.text.toLowerCase(),
+                              controller.noTelpC.text,
+                              controller.alamatC.text.toLowerCase(),
+                              controller.tabTextIndexSelected.value == 0
+                                  ? 'l'
+                                  : 'p',
+                              controller.newPassC.text);
                           mainC.checkuser();
                         }
-                        ;
                       },
                       child: Text(
                         'Simpan',
@@ -292,7 +299,7 @@ class IsiDataUserPageView extends GetView<IsiDataUserPageController> {
                         ),
                       ),
                     )),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
               ],
             ),
           ),

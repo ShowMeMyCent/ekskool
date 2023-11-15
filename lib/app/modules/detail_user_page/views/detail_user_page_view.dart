@@ -1,19 +1,19 @@
-import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../routes/app_pages.dart';
 import '../controllers/detail_user_page_controller.dart';
 
 class DetailUserPageView extends GetView<DetailUserPageController> {
   var userData = Get.arguments as Map<String, dynamic>;
+
+  DetailUserPageView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(10),
           ),
@@ -37,7 +37,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
             //stack 1
             Column(
               children: [
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
                 Center(
                   child: Container(
                     width: Get.width - 60,
@@ -53,7 +53,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
             //stack 2
             Column(
               children: [
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Center(
                   child: Container(
                       child: Column(
@@ -65,7 +65,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                           : Image.asset(
                               'assets/images/male_profile_bs.png',
                             ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       //Nama User
                       Text(
                         '${userData['nama']}',
@@ -74,18 +74,18 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 1),
+                      const SizedBox(height: 1),
                       //Nama Email User
                       Text(
                         '${userData['email']}',
                         style: GoogleFonts.poppins(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFF85868B),
+                          color: const Color(0xFF85868B),
                         ),
                       ),
-                      SizedBox(height: 30),
-                      Container(
+                      const SizedBox(height: 30),
+                      SizedBox(
                         width: Get.width - 100,
                         height: 300,
                         // color: Colors.amber,
@@ -106,7 +106,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       'Jenis Kelamin',
                                       style: GoogleFonts.poppins(
@@ -114,7 +114,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       'Level',
                                       style: GoogleFonts.poppins(
@@ -122,7 +122,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       'Status',
                                       style: GoogleFonts.poppins(
@@ -143,7 +143,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       '|',
                                       style: GoogleFonts.poppins(
@@ -151,7 +151,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       '|',
                                       style: GoogleFonts.poppins(
@@ -159,7 +159,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       '|',
                                       style: GoogleFonts.poppins(
@@ -181,7 +181,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       userData['jenis kelamin'] == 'l'
                                           ? 'Laki-laki'
@@ -191,7 +191,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       //Level
                                       '${userData['level']}',
@@ -200,7 +200,7 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Text(
                                       //Alamat
                                       '${userData['status']}',
@@ -214,13 +214,13 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 100),
+                            const SizedBox(height: 100),
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: TextButton(
                                 onPressed: () {
                                   Get.defaultDialog(
-                                      contentPadding: EdgeInsets.symmetric(
+                                      contentPadding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       title: 'Tetapkan Level',
                                       content: Column(
@@ -278,6 +278,12 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                         ],
                                       ));
                                 },
+                                style: ButtonStyle(
+                                    fixedSize: MaterialStatePropertyAll<Size>(
+                                      Size.fromWidth(Get.width),
+                                    ),
+                                    backgroundColor:
+                                        const MaterialStatePropertyAll(Colors.blue)),
                                 child: Text(
                                   'Assign Level',
                                   style: GoogleFonts.poppins(
@@ -285,12 +291,6 @@ class DetailUserPageView extends GetView<DetailUserPageController> {
                                     fontSize: 13,
                                   ),
                                 ),
-                                style: ButtonStyle(
-                                    fixedSize: MaterialStatePropertyAll<Size>(
-                                      Size.fromWidth(Get.width),
-                                    ),
-                                    backgroundColor:
-                                        MaterialStatePropertyAll(Colors.blue)),
                               ),
                             ),
                           ],

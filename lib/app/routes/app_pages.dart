@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '../modules/about_page/bindings/about_page_binding.dart';
-import '../modules/about_page/views/about_page_view.dart';
 import '../modules/absensi/bindings/absensi_binding.dart';
 import '../modules/absensi/views/absensi_view.dart';
 import '../modules/admin_page/bindings/admin_page_binding.dart';
@@ -14,6 +12,8 @@ import '../modules/detail_informasi/bindings/detail_informasi_binding.dart';
 import '../modules/detail_informasi/views/detail_informasi_view.dart';
 import '../modules/detail_user_page/bindings/detail_user_page_binding.dart';
 import '../modules/detail_user_page/views/detail_user_page_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/ekskulmenu/bindings/ekskulmenu_binding.dart';
 import '../modules/ekskulmenu/views/ekskulmenu_view.dart';
 import '../modules/history/bindings/history_binding.dart';
@@ -61,7 +61,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ADMIN_PAGE,
-      page: () => AdminPageView(),
+      page: () => const AdminPageView(),
       binding: AdminPageBinding(),
     ),
     GetPage(
@@ -70,13 +70,8 @@ class AppPages {
       binding: IsiDataUserPageBinding(),
     ),
     GetPage(
-      name: _Paths.ABOUT_PAGE,
-      page: () => const AboutPageView(),
-      binding: AboutPageBinding(),
-    ),
-    GetPage(
       name: _Paths.LIST_USERS_PAGE,
-      page: () => ListUsersPageView(),
+      page: () => const ListUsersPageView(),
       binding: ListUsersPageBinding(),
     ),
     GetPage(
@@ -113,6 +108,11 @@ class AppPages {
       name: _Paths.DETAIL_INFORMASI,
       page: () => DetailInformasiView(),
       binding: DetailInformasiBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => EditProfileView(),
+      binding: EditProfileBinding(),
     ),
   ];
 }

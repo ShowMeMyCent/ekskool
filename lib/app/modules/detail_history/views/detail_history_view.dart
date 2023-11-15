@@ -10,14 +10,16 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
   var ekskul = Get.arguments['ekskul'];
   var history = Get.arguments['history'];
 
+  DetailHistoryView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Detail Riwayat',
           style: GoogleFonts.poppins(
@@ -35,8 +37,8 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
             Container(
               width: double.infinity,
               height: Get.height / 1.8,
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
                 color: Colors.white,
@@ -44,7 +46,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                   BoxShadow(
                     color: Colors.black.withOpacity(10 / 100),
                     blurRadius: 15,
-                    offset: Offset(4, 4),
+                    offset: const Offset(4, 4),
                   ),
                 ],
               ),
@@ -79,7 +81,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                         //Tanggal
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.date_range_rounded,
                               size: 15,
                             ),
@@ -99,7 +101,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                         //Jumlah Siswa
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.people_alt_rounded,
                               size: 15,
                             ),
@@ -119,7 +121,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                         //Jam
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.access_time,
                               size: 15,
                             ),
@@ -152,7 +154,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 height: 1.5,
-                                color: Color(0xff000000),
+                                color: const Color(0xff000000),
                               ),
                             ),
                           ),
@@ -161,18 +163,23 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                         Container(
                           width: Get.width,
                           height: Get.width / 2.8,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 10,
                             vertical: 10,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(13),
-                            color: Color(0xFFF6F6F6),
+                            color: const Color(0xFFF6F6F6),
                           ),
-                          child: Text(
-                            '${history['keterangan']}',
-                            style: GoogleFonts.poppins(
-                              fontSize: 13.5,
+                          child: Scrollbar(
+                            thumbVisibility: true,
+                            child: SingleChildScrollView(
+                              child: Text(
+                                '${history['keterangan']}',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13.5,
+                                ),
+                              ),
                             ),
                           ),
                         ),

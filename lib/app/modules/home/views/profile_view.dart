@@ -9,12 +9,14 @@ import '../../../controllers/main_controller.dart';
 
 class ProfileView extends GetView {
   final mainC = Get.find<MainController>();
+
+  ProfileView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         appBar: AppBar(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(10),
             ),
@@ -33,18 +35,38 @@ class ProfileView extends GetView {
           centerTitle: true,
           actions: [
             Container(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsets.only(right: 20),
               child: IconButton(
                 onPressed: () {
                   ///MORE OPTION
                   Get.defaultDialog(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    title: 'LOGOUT',
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    title: 'Menu',
                     titlePadding: EdgeInsets.zero,
                     content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFF357AD4),
+                            fixedSize: Size(Get.width, 20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          onPressed: () {
+                            Get.toNamed(Routes.EDIT_PROFILE);
+                          },
+                          child: Text(
+                            'Edit profile',
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                         TextButton(
                           style: TextButton.styleFrom(
                             backgroundColor:
@@ -58,7 +80,7 @@ class ProfileView extends GetView {
                             mainC.logout();
                           },
                           child: Text(
-                            'Logout',
+                            'logout',
                             style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontSize: 14,
@@ -70,13 +92,13 @@ class ProfileView extends GetView {
                     ),
                   );
                 },
-                icon: Icon(FeatherIcons.moreHorizontal),
+                icon: const Icon(FeatherIcons.moreHorizontal),
               ),
             ),
           ],
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           child: FutureBuilder(
               future: mainC.checkuser(),
               builder: (context, snapshot) {
@@ -100,7 +122,7 @@ class ProfileView extends GetView {
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
 
                       ///LEVEL
                       Center(
@@ -109,27 +131,27 @@ class ProfileView extends GetView {
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF000692),
+                            color: const Color(0xFF000692),
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
                       ///Username
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //LABEL TEXT USERNAME
                             Text(
-                              'Username',
+                              'Nama',
                               style: GoogleFonts.poppins(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
 
                             //FORM USERNAME
                             Container(
@@ -145,14 +167,76 @@ class ProfileView extends GetView {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Alamat',
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+
+                            //FORM USERNAME
+                            Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextFormField(
+                                readOnly: true,
+                                initialValue: mainC.userData['alamat'],
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'No telpon',
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+
+                            //FORM USERNAME
+                            Container(
+                              height: 55,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: TextFormField(
+                                readOnly: true,
+                                initialValue: mainC.userData['no telpon'],
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
 
                             //LABEL TEXT EMAIL
                             Text(
@@ -162,7 +246,7 @@ class ProfileView extends GetView {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
 
                             //FORM EMAIL
                             Container(
@@ -178,23 +262,24 @@ class ProfileView extends GetView {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                           ],
                         ),
                       ),
                     ],
                   );
-                } else
-                  return Center(
+                } else {
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
+                }
               }),
         ));
   }

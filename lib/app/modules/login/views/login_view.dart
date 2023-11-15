@@ -9,10 +9,12 @@ import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   final mainC = Get.find<MainController>();
+
+  LoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
@@ -20,28 +22,26 @@ class LoginView extends GetView<LoginController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 150),
+                const SizedBox(height: 150),
                 Center(
-                  child: Container(
-                    child: Image.asset(
-                      'assets/images/login_vector.png',
-                      width: 204,
-                      height: 184,
-                    ),
+                  child: Image.asset(
+                    'assets/images/login_vector.png',
+                    width: 204,
+                    height: 184,
                   ),
                 ),
-                SizedBox(height: 58),
+                const SizedBox(height: 58),
                 Center(
                   child: Text(
                     "Login  ",
                     style: GoogleFonts.poppins(
                       fontSize: 32,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF357AD4),
+                      color: const Color(0xFF357AD4),
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Center(
                   child: Container(
                     // margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -55,27 +55,27 @@ class LoginView extends GetView<LoginController> {
                       controller: controller.emailC,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           vertical: 0,
                           horizontal: 15,
                         ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xFF0000).withOpacity(.5),
+                            color: const Color(0x00ff0000).withOpacity(.5),
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         hintText: 'Email-Address',
                         hintStyle: GoogleFonts.poppins(
                           fontSize: 19,
-                          color: Color(0xFFCACACA),
+                          color: const Color(0xFFCACACA),
                           height: .4,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Center(
                   child: Container(
                     decoration: BoxDecoration(
@@ -90,7 +90,7 @@ class LoginView extends GetView<LoginController> {
                           controller: controller.passC,
                           obscureText: controller.isHidden.value,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                               vertical: 0,
                               horizontal: 15,
                             ),
@@ -105,7 +105,7 @@ class LoginView extends GetView<LoginController> {
                               }),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.blueGrey,
                               ),
                               borderRadius: BorderRadius.circular(15),
@@ -113,7 +113,7 @@ class LoginView extends GetView<LoginController> {
                             hintText: 'Password',
                             hintStyle: GoogleFonts.poppins(
                               fontSize: 19,
-                              color: Color(0xFFCACACA),
+                              color: const Color(0xFFCACACA),
                               height: .4,
                             ),
                           ),
@@ -122,7 +122,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Container(
                   width: Get.width,
                   decoration: BoxDecoration(

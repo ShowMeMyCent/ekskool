@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:get/get.dart';
@@ -10,12 +11,17 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final mainC = Get.put(MainController(), permanent: true);
   final data = await mainC.checkuser();
+
   runApp(myApp(data: data));
   FlutterNativeSplash.remove();
 }
@@ -24,7 +30,7 @@ class myApp extends StatelessWidget {
   final mainC = Get.find<MainController>();
   final data;
 
-  myApp({this.data});
+  myApp({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {

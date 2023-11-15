@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,8 @@ import '../controllers/absensi_controller.dart';
 
 class AbsensiView extends GetView<AbsensiController> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
+
+  AbsensiView({super.key});
   String getAmPmLabel(TimeOfDay time) {
     return time.hour < 12 ? 'AM' : 'PM';
   }
@@ -23,11 +26,11 @@ class AbsensiView extends GetView<AbsensiController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Absensi',
           style: GoogleFonts.poppins(
@@ -39,7 +42,7 @@ class AbsensiView extends GetView<AbsensiController> {
         centerTitle: true,
         actions: [
           Container(
-            padding: EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20),
             child: Image.asset(
               'assets/images/male_profile.png',
               width: 35,
@@ -53,7 +56,7 @@ class AbsensiView extends GetView<AbsensiController> {
           child: Column(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
                   color: Colors.white,
@@ -61,7 +64,7 @@ class AbsensiView extends GetView<AbsensiController> {
                     BoxShadow(
                       color: Colors.black.withOpacity(10 / 100),
                       blurRadius: 15,
-                      offset: Offset(4, 4),
+                      offset: const Offset(4, 4),
                     ),
                   ],
                 ),
@@ -83,7 +86,7 @@ class AbsensiView extends GetView<AbsensiController> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
 
                         Text(
                           'Ekskul',
@@ -92,18 +95,18 @@ class AbsensiView extends GetView<AbsensiController> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
                           padding: EdgeInsets.zero,
                           height: 60,
                           decoration: BoxDecoration(
-                              color: Color(0xFFF6F6F6),
+                              color: const Color(0xFFF6F6F6),
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.black.withOpacity(.25),
                                     blurRadius: 4,
-                                    offset: Offset(0, 4)),
+                                    offset: const Offset(0, 4)),
                               ]),
                           child: StreamBuilder(
                             stream: FirebaseFirestore.instance
@@ -125,7 +128,7 @@ class AbsensiView extends GetView<AbsensiController> {
                                       style: GoogleFonts.poppins(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xFFAAAAAA),
+                                        color: const Color(0xFFAAAAAA),
                                       ),
                                     ),
                                   ),
@@ -146,7 +149,7 @@ class AbsensiView extends GetView<AbsensiController> {
                                       style: GoogleFonts.poppins(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xFFAAAAAA),
+                                        color: const Color(0xFFAAAAAA),
                                       ),
                                     ),
                                   ),
@@ -182,7 +185,7 @@ class AbsensiView extends GetView<AbsensiController> {
                                       style: GoogleFonts.poppins(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xFFAAAAAA),
+                                        color: const Color(0xFFAAAAAA),
                                       ),
                                     ),
                                   ),
@@ -230,7 +233,7 @@ class AbsensiView extends GetView<AbsensiController> {
                           ),
                         ),
 
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
 
                         ///Tanggal
                         Text(
@@ -240,70 +243,54 @@ class AbsensiView extends GetView<AbsensiController> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
 
-                        GestureDetector(
-                          onTap: () async {
-                            // Show date picker and update selected date
-                            final selectedDate = await showDatePicker(
-                              context: context,
-                              initialDate: controller.selectedDate.value,
-                              firstDate: DateTime(2022),
-                              lastDate: DateTime(2024, 12,
-                                  31), // Set lastDate to December 31, 2023
-                            );
-                            if (selectedDate != null) {
-                              controller.selectedDate.value = selectedDate;
-                              // Fetch data when date changes
-                            }
-                          },
-                          child: Obx(
-                            () {
-                              return Container(
-                                padding: EdgeInsets.zero,
-                                height: 50,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF6F6F6),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(.25),
-                                      blurRadius: 4,
-                                      offset: Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          FontAwesome.calendar,
-                                          color: Colors.grey,
+                        Obx(
+                          () {
+                            return Container(
+                              padding: EdgeInsets.zero,
+                              height: 50,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF6F6F6),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.25),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        FontAwesome.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        formatter.format(controller.selectedDate.value.toLocal()),
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '${formatter.format(controller.selectedDate.value.toLocal())}',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
 
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
 
                         ///Jam
                         Text(
@@ -313,76 +300,52 @@ class AbsensiView extends GetView<AbsensiController> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 5),
-                        GestureDetector(
-                          onTap: () async {
-                            // Show time picker and update selected time
-                            final selectedTime = await showTimePicker(
-                              initialEntryMode: TimePickerEntryMode.inputOnly,
-                              context: context,
-                              initialTime: TimeOfDay.now(),
-                              builder: (BuildContext context, Widget? child) {
-                                return MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(
-                                    alwaysUse24HourFormat: true,
+                        const SizedBox(height: 5),
+                        Obx(
+                          () {
+                            return Container(
+                              padding: EdgeInsets.zero,
+                              height: 50,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF6F6F6),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(.25),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 4),
                                   ),
-                                  child: child!,
-                                );
-                              },
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        FontAwesome.clock,
+                                        color: Colors.grey,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        '${controller.selectedTime.value.hour.toString().padLeft(2, '0')}:${controller.selectedTime.value.minute.toString().padLeft(2, '0')} ${getAmPmLabel(controller.selectedTime.value)}',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             );
-                            if (selectedTime != null) {
-                              // Update selected time
-                              controller.selectedTime.value = selectedTime;
-                              // Fetch data or perform any other action when time changes
-                            }
-                            print(controller.selectedTime);
                           },
-                          child: Obx(
-                            () {
-                              return Container(
-                                padding: EdgeInsets.zero,
-                                height: 50,
-                                width: Get.width,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF6F6F6),
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(.25),
-                                      blurRadius: 4,
-                                      offset: Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          FontAwesome.clock,
-                                          color: Colors.grey,
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '${controller.selectedTime.value.hour.toString().padLeft(2, '0')}:${controller.selectedTime.value.minute.toString().padLeft(2, '0')} ${getAmPmLabel(controller.selectedTime.value)}',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
 
                         ///Jumlah Siswa
                         Text(
@@ -392,29 +355,36 @@ class AbsensiView extends GetView<AbsensiController> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
                           padding: EdgeInsets.zero,
                           height: 50,
                           decoration: BoxDecoration(
-                              color: Color(0xFFF6F6F6),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(.25),
-                                    blurRadius: 4,
-                                    offset: Offset(0, 4)),
-                              ]),
+                            color: const Color(0xFFF6F6F6),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(.25),
+                                blurRadius: 4,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
                           child: TextFormField(
                             controller: controller.jmlSiswa,
                             scrollPadding: EdgeInsets.zero,
                             maxLines: 1,
                             keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(
+                                  2), // Limit to 2 characters
+                            ],
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               prefixIcon: Icon(
                                 FontAwesome.users,
                                 color: Colors.grey,
@@ -428,7 +398,7 @@ class AbsensiView extends GetView<AbsensiController> {
                           ),
                         ),
 
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
 
                         ///Jumlah Siswa
                         Text(
@@ -438,7 +408,7 @@ class AbsensiView extends GetView<AbsensiController> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         GestureDetector(
                           onTap: () {
                             controller.pickImage();
@@ -448,32 +418,32 @@ class AbsensiView extends GetView<AbsensiController> {
                             height: 50,
                             width: Get.width,
                             decoration: BoxDecoration(
-                              color: Color(0xFFF6F6F6),
+                              color: const Color(0xFFF6F6F6),
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(.25),
                                   blurRadius: 4,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       FontAwesome.camera_retro,
                                       color: Colors.grey,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Obx(() => Text(
-                                          '${controller.pickedImageName.value}',
-                                          style: TextStyle(
+                                          controller.pickedImageName.value,
+                                          style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -484,7 +454,7 @@ class AbsensiView extends GetView<AbsensiController> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
 
                         ///Keterangan
                         Text(
@@ -494,18 +464,18 @@ class AbsensiView extends GetView<AbsensiController> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
                           padding: EdgeInsets.zero,
                           height: 70,
                           decoration: BoxDecoration(
-                              color: Color(0xFFF6F6F6),
+                              color: const Color(0xFFF6F6F6),
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.black.withOpacity(.25),
                                     blurRadius: 4,
-                                    offset: Offset(0, 4)),
+                                    offset: const Offset(0, 4)),
                               ]),
                           child: TextField(
                             controller: controller.keterangan,
@@ -516,7 +486,7 @@ class AbsensiView extends GetView<AbsensiController> {
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               prefixIcon: Icon(
                                 FontAwesome.book_bookmark,
                                 color: Colors.grey,
@@ -529,7 +499,7 @@ class AbsensiView extends GetView<AbsensiController> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
 
                         ///BUTTON SIMPAN
 

@@ -1,4 +1,3 @@
-import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,7 +14,7 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'List Users',
           style: GoogleFonts.poppins(
@@ -30,25 +29,25 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
           stream: controller.catchAllUser(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               print(snapshot.error);
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
               return ListView.separated(
                   itemCount: snapshot.data!.docs.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     var userDoc = snapshot.data!.docs[index];
-                    var userData = userDoc.data() as Map<String, dynamic>;
+                    var userData = userDoc.data();
                     return GestureDetector(
                       onTap: () {
                         Get.toNamed(Routes.DETAIL_USER_PAGE,
                             arguments: userData);
                       },
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20),
-                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: Colors.white,
@@ -88,7 +87,7 @@ class ListUsersPageView extends GetView<ListUsersPageController> {
                               ),
                               Text(
                                 '${userData['level']}',
-                                style: TextStyle(color: Colors.blue),
+                                style: const TextStyle(color: Colors.blue),
                               )
                             ],
                           ),

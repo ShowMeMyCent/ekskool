@@ -10,14 +10,16 @@ import '../controllers/tambah_ekskul_controller.dart';
 class TambahEkskulView extends GetView<TambahEkskulController> {
   final _formKey = GlobalKey<FormState>();
 
+  TambahEkskulView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Tambah Ekskul',
           style: GoogleFonts.poppins(
@@ -29,7 +31,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.fromLTRB(40, 0, 41, 23),
+        margin: const EdgeInsets.fromLTRB(40, 0, 41, 23),
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(9),
@@ -40,15 +42,13 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Nama Ekskul
-              Container(
-                child: Text(
-                  'Nama Ekskul',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                    color: Color(0xff000000),
-                  ),
+              Text(
+                'Nama Ekskul',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  height: 1.5,
+                  color: const Color(0xff000000),
                 ),
               ),
               TextFormField(
@@ -64,7 +64,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
+                      color: const Color(0xFFAAAAAA),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -78,24 +78,22 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                 },
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
               /// Jadwal Ekskul
-              Container(
-                child: Text(
-                  'Jadwal Ekskul',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                    color: Color(0xff000000),
-                  ),
+              Text(
+                'Jadwal Ekskul',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  height: 1.5,
+                  color: const Color(0xff000000),
                 ),
               ),
               DropdownSearch(
-                items: [
+                items: const [
                   'Senin',
                   'Selasa',
                   'Rabu',
@@ -113,7 +111,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                     hintStyle: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFFAAAAAA),
+                      color: const Color(0xFFAAAAAA),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -137,7 +135,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                         ));
                   }
                   return Text(
-                    '$selectedItem',
+                    selectedItem,
                     style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -146,20 +144,18 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                 },
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
               /// Penanggung Ekskul
-              Container(
-                child: Text(
-                  'Pelatih Ekskul',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    height: 1.5,
-                    color: Color(0xff000000),
-                  ),
+              Text(
+                'Pelatih Ekskul',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  height: 1.5,
+                  color: const Color(0xff000000),
                 ),
               ),
               StreamBuilder(
@@ -169,11 +165,11 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text("Loading");
+                    return const Text("Loading");
                   }
 
                   var usersData = snapshot.data?.docs
@@ -203,7 +199,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFFAAAAAA),
+                            color: const Color(0xFFAAAAAA),
                           ),
                         ),
                       ),
@@ -257,7 +253,7 @@ class TambahEkskulView extends GetView<TambahEkskulController> {
                 },
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextButton(

@@ -13,7 +13,6 @@ abstract class Routes {
   static const ADMIN_PAGE = _Paths.ADMIN_PAGE;
   static const TAMBAH_INFORMASI = _Paths.TAMBAH_INFORMASI;
   static const ISI_DATA_USER_PAGE = _Paths.ISI_DATA_USER_PAGE;
-  static const ABOUT_PAGE = _Paths.ABOUT_PAGE;
   static const LIST_USERS_PAGE = _Paths.LIST_USERS_PAGE;
   static const DETAIL_USER_PAGE = _Paths.DETAIL_USER_PAGE;
   static const REKAPDATA = _Paths.REKAPDATA;
@@ -23,6 +22,7 @@ abstract class Routes {
   static const DETAIL_HISTORY = _Paths.DETAIL_HISTORY;
   static const DETAIL_EKSKUL = _Paths.DETAIL_EKSKUL;
   static const DETAIL_INFORMASI = _Paths.DETAIL_INFORMASI;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -37,7 +37,6 @@ abstract class _Paths {
   static const ADMIN_PAGE = '/admin-page';
   static const TAMBAH_INFORMASI = '/tambah-informasi';
   static const ISI_DATA_USER_PAGE = '/isi-data-user-page';
-  static const ABOUT_PAGE = '/about-page';
   static const LIST_USERS_PAGE = '/list-users-page';
   static const DETAIL_USER_PAGE = '/detail-user-page';
   static const REKAPDATA = '/rekapdata';
@@ -47,4 +46,5 @@ abstract class _Paths {
   static const DETAIL_HISTORY = '/detail-history';
   static const DETAIL_EKSKUL = '/detail-ekskul';
   static const DETAIL_INFORMASI = '/detail-informasi';
+  static const EDIT_PROFILE = '/edit-profile';
 }

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +24,7 @@ class IsiDataUserPageController extends GetxController {
     String noTelp,
     String alamat,
     String JK,
+    String newPass,
   ) async {
     final user = FirebaseAuth.instance.currentUser;
 
@@ -37,16 +37,24 @@ class IsiDataUserPageController extends GetxController {
         "alamat": alamat,
         "jenis kelamin": JK,
         "level": 'user',
-        "status": 'active',
       };
 
       try {
+        await user.updatePassword(newPass);
         await FirebaseFirestore.instance
             .collection("users")
             .doc(user.uid)
             .set(users);
         Get.offAllNamed(Routes.HOME);
         // Data has been successfully added to Firestore.
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          Get.snackbar(
+            'Password Lemah',
+            'Password minimal 6 karakter',
+            backgroundColor: Colors.white,
+          );
+        }
       } catch (e) {
         // Handle any errors that occur during the write operation.
         Get.snackbar(
@@ -56,10 +64,5 @@ class IsiDataUserPageController extends GetxController {
         );
       }
     }
-  }
-
-  void updatePassword(newPass) async {
-    final user = FirebaseAuth.instance.currentUser;
-    await user?.updatePassword(newPass);
   }
 }

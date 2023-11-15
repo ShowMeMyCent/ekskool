@@ -10,13 +10,15 @@ import '../controllers/history_controller.dart';
 class HistoryView extends GetView<HistoryController> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
+  HistoryView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Riwayat',
           style: GoogleFonts.poppins(
@@ -28,7 +30,7 @@ class HistoryView extends GetView<HistoryController> {
         centerTitle: true,
         actions: [
           Container(
-            padding: EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20),
             child: Image.asset(
               'assets/images/male_profile.png',
               width: 35,
@@ -44,7 +46,7 @@ class HistoryView extends GetView<HistoryController> {
                 'Selected Date: ${formatter.format(controller.selectedDate.value.toLocal())}',
                 style: const TextStyle(fontSize: 16),
               ),
-              tileColor: Color(0xFFF3F7F8),
+              tileColor: const Color(0xFFF3F7F8),
               trailing: const Icon(Icons.calendar_today),
               onTap: () async {
                 // Show date picker and update selected date
@@ -61,7 +63,7 @@ class HistoryView extends GetView<HistoryController> {
               },
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
               child: Obx(
             () => FutureBuilder(
@@ -70,14 +72,14 @@ class HistoryView extends GetView<HistoryController> {
                 builder: (context, snapshot) {
                   var historyDocs = snapshot.data?.docs;
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     ); // Placeholder for loading
                   } else if (snapshot.hasError) {
                     return Text('Error: ${snapshot.error}');
                   } else if (historyDocs.length > 0) {
                     return ListView.separated(
-                      separatorBuilder: (context, index) => SizedBox(height: 2),
+                      separatorBuilder: (context, index) => const SizedBox(height: 2),
                       itemCount: historyDocs.length,
                       itemBuilder: (context, index) {
                         var historyDoc = snapshot.data!.docs[index];
@@ -91,7 +93,7 @@ class HistoryView extends GetView<HistoryController> {
                             builder: (context, userEkskulSnapshot) {
                               if (userEkskulSnapshot.connectionState ==
                                   ConnectionState.waiting) {
-                                return SizedBox.shrink();
+                                return const SizedBox.shrink();
                               } else if (userEkskulSnapshot.hasError) {
                                 return Text('Error: ${snapshot.error}');
                               } else {
@@ -151,7 +153,7 @@ class HistoryView extends GetView<HistoryController> {
                                         ),
                                         const SizedBox(height: 10),
                                         Text(
-                                          "${historyItem['keterangan']}",
+                                          "${historyItem['keterangan'].length <= 60 ? historyItem['keterangan'] : historyItem['keterangan'].substring(0, 60) + '...'}",
                                           style:
                                               GoogleFonts.poppins(fontSize: 10),
                                         ),
@@ -184,7 +186,7 @@ class HistoryView extends GetView<HistoryController> {
                       },
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: Text('tidak ada data'),
                     );
                   }

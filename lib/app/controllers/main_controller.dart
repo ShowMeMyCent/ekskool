@@ -51,7 +51,7 @@ class MainController extends GetxController {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool(user.uid, false);
         // User has not completed the setup, redirect to a different route
-        Get.offAllNamed(Routes.ISI_DATA_USER_PAGE);
+        Get.toNamed(Routes.ISI_DATA_USER_PAGE);
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

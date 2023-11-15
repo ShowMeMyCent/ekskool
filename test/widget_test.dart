@@ -6,7 +6,6 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:ekskool_v1/app/modules/absensi/views/absensi_view.dart';
-import 'package:ekskool_v1/app/modules/home/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

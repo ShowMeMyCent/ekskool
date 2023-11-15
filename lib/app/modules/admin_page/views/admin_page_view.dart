@@ -7,16 +7,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/admin_page_controller.dart';
 
 class AdminPageView extends GetView<AdminPageController> {
+  const AdminPageView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
 
       ///APP BAR
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Admin Page',
           style: GoogleFonts.poppins(
@@ -35,8 +37,8 @@ class AdminPageView extends GetView<AdminPageController> {
 
             ///TAMBAH USER
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.all(15),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
@@ -69,9 +71,9 @@ class AdminPageView extends GetView<AdminPageController> {
                     ),
                     onPressed: () {
                       Get.defaultDialog(
-                        contentPadding: EdgeInsets.all(20),
+                        contentPadding: const EdgeInsets.all(20),
                         title: 'Tambah User',
-                        titlePadding: EdgeInsets.only(top: 20),
+                        titlePadding: const EdgeInsets.only(top: 20),
                         titleStyle: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -85,13 +87,13 @@ class AdminPageView extends GetView<AdminPageController> {
                                 labelText: 'Email',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.black,
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             TextButton(
                               style: TextButton.styleFrom(
                                 backgroundColor: Colors.blue,
@@ -135,8 +137,8 @@ class AdminPageView extends GetView<AdminPageController> {
 
             /// TAMBAH INFORMASI
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.all(15),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
@@ -184,7 +186,7 @@ class AdminPageView extends GetView<AdminPageController> {
                 ],
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             ///FITUR
             Padding(
@@ -197,9 +199,9 @@ class AdminPageView extends GetView<AdminPageController> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -209,7 +211,7 @@ class AdminPageView extends GetView<AdminPageController> {
                       Get.toNamed(Routes.EKSKULMENU);
                     },
                     child: Container(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       width: 135,
                       height: 165,
                       decoration: BoxDecoration(
@@ -219,7 +221,7 @@ class AdminPageView extends GetView<AdminPageController> {
                           BoxShadow(
                             color: Colors.black.withOpacity(10 / 100),
                             blurRadius: 15,
-                            offset: Offset(4, 4),
+                            offset: const Offset(4, 4),
                           ),
                         ],
                       ),
@@ -229,7 +231,7 @@ class AdminPageView extends GetView<AdminPageController> {
                             width: 110,
                             height: 90,
                             decoration: BoxDecoration(
-                              color: Color(0xFFE4E4E5),
+                              color: const Color(0xFFE4E4E5),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Image.asset(
@@ -257,7 +259,7 @@ class AdminPageView extends GetView<AdminPageController> {
                   GestureDetector(
                     onTap: () => Get.toNamed(Routes.LIST_USERS_PAGE),
                     child: Container(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       width: 135,
                       height: 165,
                       decoration: BoxDecoration(
@@ -267,7 +269,7 @@ class AdminPageView extends GetView<AdminPageController> {
                           BoxShadow(
                             color: Colors.black.withOpacity(10 / 100),
                             blurRadius: 15,
-                            offset: Offset(4, 4),
+                            offset: const Offset(4, 4),
                           ),
                         ],
                       ),
@@ -277,7 +279,7 @@ class AdminPageView extends GetView<AdminPageController> {
                             width: 110,
                             height: 90,
                             decoration: BoxDecoration(
-                              color: Color(0xFFE4E4E5),
+                              color: const Color(0xFFE4E4E5),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Image.asset(

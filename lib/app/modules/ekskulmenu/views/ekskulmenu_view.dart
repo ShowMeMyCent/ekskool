@@ -11,11 +11,11 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         appBar: AppBar(
           foregroundColor: Colors.black,
           elevation: 0,
-          backgroundColor: Color(0xFFF3F7F8),
+          backgroundColor: const Color(0xFFF3F7F8),
           title: Text(
             'Ekskul Menu',
             style: GoogleFonts.poppins(
@@ -29,12 +29,12 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.all(15),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
@@ -82,7 +82,7 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               height: 40,
               thickness: 2,
             ),
@@ -91,20 +91,20 @@ class EkskulmenuView extends GetView<EkskulmenuController> {
                   stream: controller.fetchekskul(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (snapshot.data!.docs.length == 0) {
-                      return Center(child: Text('Tidak Ada Data'));
+                    } else if (snapshot.data!.docs.isEmpty) {
+                      return const Center(child: Text('Tidak Ada Data'));
                     } else {
                       return ListView.separated(
                         separatorBuilder: (context, index) =>
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           var ekskulDoc = snapshot.data!.docs[index];
                           var ekskulItem =
-                              ekskulDoc.data() as Map<String, dynamic>;
+                              ekskulDoc.data();
                           return GestureDetector(
                             onTap: () {
                               Get.toNamed(Routes.DETAIL_EKSKUL,

@@ -9,14 +9,16 @@ import '../controllers/detail_ekskul_controller.dart';
 
 class DetailEkskulView extends GetView<DetailEkskulController> {
   var ekskulData = Get.arguments as Map<String, dynamic>;
+
+  DetailEkskulView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Detail Ekskul',
           style: GoogleFonts.poppins(
@@ -34,8 +36,8 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
             Container(
               width: double.infinity,
               height: Get.height / 1.9,
-              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
                 color: Colors.white,
@@ -43,7 +45,7 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                   BoxShadow(
                     color: Colors.black.withOpacity(10 / 100),
                     blurRadius: 15,
-                    offset: Offset(4, 4),
+                    offset: const Offset(4, 4),
                   ),
                 ],
               ),
@@ -71,7 +73,7 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                             width: 120,
                             // color: Colors.amber,
                             height: 100,
@@ -94,7 +96,7 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                                 ),
                               ],
                             )),
-                        Container(
+                        SizedBox(
                             width: 120,
                             // color: Colors.amber,
                             height: 100,
@@ -114,7 +116,7 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.waiting) {
-                                        return SizedBox
+                                        return const SizedBox
                                             .shrink(); // or a loading indicator
                                       } else {
                                         var querySnapshot = snapshot.data
@@ -123,8 +125,7 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                                         var documents = querySnapshot
                                             .docs; // Accessing the list of documents
                                         var firstDocumentData =
-                                            documents[0].data() as Map<String,
-                                                dynamic>; // Accessing data of the first document
+                                            documents[0].data(); // Accessing data of the first document
                                         return Text(
                                           "${firstDocumentData['nama']}",
                                           style: GoogleFonts.poppins(
@@ -145,6 +146,57 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          DropdownSearch(
+                            items: const [
+                              'Senin',
+                              'Selasa',
+                              'Rabu',
+                              'Kamis',
+                              'Jumat',
+                            ],
+                            onChanged: (value) {
+                              controller.setSelectedDay(value!);
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Pilih Hari',
+                                hintStyle: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFFAAAAAA),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Tolong pilih hari';
+                              }
+                              return null;
+                            },
+                            dropdownBuilder: (context, selectedItem) {
+                              if (selectedItem == null) {
+                                return Text('Pilih Hari',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.grey,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ));
+                              }
+                              return Text(
+                                selectedItem,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              );
+                            },
+                          ),
                           StreamBuilder(
                             stream: FirebaseFirestore.instance
                                 .collection('users')
@@ -152,12 +204,12 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                                 .snapshots(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
-                                return Text('Something went wrong');
+                                return const Text('Something went wrong');
                               }
 
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
-                                return Text("Loading");
+                                return const Text("Loading");
                               }
 
                               var usersData = snapshot.data?.docs
@@ -189,7 +241,7 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                                       style: GoogleFonts.poppins(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xFFAAAAAA),
+                                        color: const Color(0xFFAAAAAA),
                                       ),
                                     ),
                                   ),
@@ -251,11 +303,16 @@ class DetailEkskulView extends GetView<DetailEkskulController> {
                                 ),
                               ),
                               onPressed: () {
-                                controller.gantiPelatih(
-                                    ekskulData['id'], controller.selecteduser);
+                                if (controller.selecteduser != null ||
+                                    controller.selectedDay.value != '') {
+                                  controller.editEkskul(
+                                      ekskulData['id'],
+                                      controller.selecteduser,
+                                      controller.selectedDay.value);
+                                }
                               },
                               child: Text(
-                                'Ganti Pelatih',
+                                'Ganti',
                                 style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 13,

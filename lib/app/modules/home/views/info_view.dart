@@ -7,15 +7,17 @@ import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class InfoView extends GetView<HomeController> {
+  const InfoView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
         backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(10),
           ),
@@ -34,18 +36,18 @@ class InfoView extends GetView<HomeController> {
           stream: controller.catchInfoDoc(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.data!.docs.isEmpty) {
-              return Center(child: Text('Tidak Ada Informasi'));
+              return const Center(child: Text('Tidak Ada Informasi'));
             } else {
               return ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(height: 2),
+                separatorBuilder: (context, index) => const SizedBox(height: 2),
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   var infoDoc = snapshot.data!.docs[index];
-                  var infoData = infoDoc.data() as Map<String, dynamic>;
+                  var infoData = infoDoc.data();
                   return GestureDetector(
                     onTap: () {
                       Get.toNamed(Routes.DETAIL_INFORMASI, arguments: infoData);

@@ -12,13 +12,15 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   final mainC = Get.find<MainController>();
 
+  HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         appBar: AppBar(
           backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(10),
             ),
@@ -53,23 +55,23 @@ class HomeView extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
               ///SLIDER CARD
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 height: 130,
                 child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Container(
                         width: 300,
                         decoration: BoxDecoration(
-                          color: Color(0xFF3A7FD5),
+                          color: const Color(0xFF3A7FD5),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Stack(
                           children: [
-                            Container(
+                            SizedBox(
                               width: Get.width,
                               height: Get.height,
                               child: Image.asset(
@@ -136,7 +138,7 @@ class HomeView extends GetView<HomeController> {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            Center(
+                            const Center(
                               child: CircularProgressIndicator(),
                             )
                           ],
@@ -178,7 +180,7 @@ class HomeView extends GetView<HomeController> {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            Center(
+                            const Center(
                               child: Text('Error'),
                             )
                           ],
@@ -220,10 +222,10 @@ class HomeView extends GetView<HomeController> {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            Center(
+                            const Center(
                               child: Text('Belum ada informasi'),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             )
                           ],
@@ -232,7 +234,7 @@ class HomeView extends GetView<HomeController> {
                     }
                     var document =
                         snapshot.data!.docs.first; // Get the first document
-                    var data = document.data() as Map<String, dynamic>;
+                    var data = document.data();
                     return GestureDetector(
                       onTap: () {
                         Get.toNamed(Routes.DETAIL_INFORMASI, arguments: data);
@@ -321,7 +323,7 @@ class HomeView extends GetView<HomeController> {
                               GestureDetector(
                                 onTap: () => Get.toNamed(Routes.ADMIN_PAGE),
                                 child: Container(
-                                  padding: EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(12),
                                   width: 135,
                                   height: 165,
                                   decoration: BoxDecoration(
@@ -332,7 +334,7 @@ class HomeView extends GetView<HomeController> {
                                         color:
                                             Colors.black.withOpacity(10 / 100),
                                         blurRadius: 15,
-                                        offset: Offset(4, 4),
+                                        offset: const Offset(4, 4),
                                       ),
                                     ],
                                   ),
@@ -342,7 +344,7 @@ class HomeView extends GetView<HomeController> {
                                         width: 110,
                                         height: 90,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFE4E4E5),
+                                          color: const Color(0xFFE4E4E5),
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
@@ -377,7 +379,7 @@ class HomeView extends GetView<HomeController> {
                                   Get.toNamed(Routes.HISTORY);
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(12),
                                   width: 135,
                                   height: 165,
                                   decoration: BoxDecoration(
@@ -388,7 +390,7 @@ class HomeView extends GetView<HomeController> {
                                         color:
                                             Colors.black.withOpacity(10 / 100),
                                         blurRadius: 15,
-                                        offset: Offset(4, 4),
+                                        offset: const Offset(4, 4),
                                       ),
                                     ],
                                   ),
@@ -398,7 +400,7 @@ class HomeView extends GetView<HomeController> {
                                         width: 110,
                                         height: 90,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFE4E4E5),
+                                          color: const Color(0xFFE4E4E5),
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
@@ -433,7 +435,7 @@ class HomeView extends GetView<HomeController> {
                               GestureDetector(
                                 onTap: () => Get.toNamed(Routes.ABSENSI),
                                 child: Container(
-                                  padding: EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(12),
                                   width: 135,
                                   height: 165,
                                   decoration: BoxDecoration(
@@ -444,7 +446,7 @@ class HomeView extends GetView<HomeController> {
                                         color:
                                             Colors.black.withOpacity(10 / 100),
                                         blurRadius: 15,
-                                        offset: Offset(4, 4),
+                                        offset: const Offset(4, 4),
                                       ),
                                     ],
                                   ),
@@ -454,7 +456,7 @@ class HomeView extends GetView<HomeController> {
                                         width: 110,
                                         height: 90,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFE4E4E5),
+                                          color: const Color(0xFFE4E4E5),
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
@@ -488,7 +490,7 @@ class HomeView extends GetView<HomeController> {
                                   Get.toNamed(Routes.HISTORY);
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(12),
                                   width: 135,
                                   height: 165,
                                   decoration: BoxDecoration(
@@ -499,7 +501,7 @@ class HomeView extends GetView<HomeController> {
                                         color:
                                             Colors.black.withOpacity(10 / 100),
                                         blurRadius: 15,
-                                        offset: Offset(4, 4),
+                                        offset: const Offset(4, 4),
                                       ),
                                     ],
                                   ),
@@ -509,7 +511,7 @@ class HomeView extends GetView<HomeController> {
                                         width: 110,
                                         height: 90,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFE4E4E5),
+                                          color: const Color(0xFFE4E4E5),
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
@@ -539,7 +541,7 @@ class HomeView extends GetView<HomeController> {
                         } else
                           return Align(
                             alignment: Alignment.center,
-                            child: Container(
+                            child: SizedBox(
                               height: MediaQuery.of(context).size.height *
                                   0.3, // Adjust the height as needed
                               child: Center(
@@ -554,7 +556,7 @@ class HomeView extends GetView<HomeController> {
                           );
                       },
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                   ],
                 ),
               )

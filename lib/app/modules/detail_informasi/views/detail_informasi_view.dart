@@ -7,14 +7,16 @@ import '../controllers/detail_informasi_controller.dart';
 
 class DetailInformasiView extends GetView<DetailInformasiController> {
   var infoData = Get.arguments as Map<String, dynamic>;
+
+  DetailInformasiView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF3F7F8),
+      backgroundColor: const Color(0xFFF3F7F8),
       appBar: AppBar(
         foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Color(0xFFF3F7F8),
+        backgroundColor: const Color(0xFFF3F7F8),
         title: Text(
           'Detail Informasi',
           style: GoogleFonts.poppins(
@@ -26,7 +28,7 @@ class DetailInformasiView extends GetView<DetailInformasiController> {
         centerTitle: true,
       ),
       body: Container(
-        margin: EdgeInsets.fromLTRB(40, 40, 41, 23),
+        margin: const EdgeInsets.fromLTRB(40, 40, 41, 23),
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(9),
@@ -80,7 +82,7 @@ class DetailInformasiView extends GetView<DetailInformasiController> {
                       child: Scrollbar(
                         thumbVisibility: true,
                         child: SingleChildScrollView(
-                          child: Container(
+                          child: SizedBox(
                             width: double.infinity,
                             child: Text(
                               '${infoData['detail']}',
